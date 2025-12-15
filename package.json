@@ -12,6 +12,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.948.0",
+    "@aws-sdk/lib-storage": "^3.948.0",
     "@hookform/resolvers": "^3.3.4",
     "@sentry/react": "^7.99.0",
     "@supabase/supabase-js": "^2.39.3",
