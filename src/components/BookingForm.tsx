@@ -7,6 +7,7 @@ import { sanitizeInput } from '../lib/sanitize'
 import { useRecaptcha } from '../hooks/useRecaptcha'
 import { captureException } from '../lib/sentry'
 import { cn } from '../lib/utils'
+import { uploadFile, validateFile } from '../lib/storage'
 
 const serviceOptions = [
   'Visa Application Support',
@@ -102,6 +103,8 @@ export default function BookingForm() {
     'idle'
   )
   const [errorMessage, setErrorMessage] = useState('')
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
+  const [uploadProgress, setUploadProgress] = useState<number>(0)
   const { verifyRecaptcha, isRecaptchaAvailable } = useRecaptcha()
 
   const {
@@ -114,9 +117,42 @@ export default function BookingForm() {
     mode: 'onBlur',
   })
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || [])
+    
+    // Validate each file
+    const validFiles: File[] = []
+    const errors: string[] = []
+    
+    files.forEach(file => {
+      const validation = validateFile(file)
+      if (validation.valid) {
+        validFiles.push(file)
+      } else {
+        errors.push(`${file.name}: ${validation.error}`)
+      }
+    })
+    
+    if (errors.length > 0) {
+      setErrorMessage(errors.join('\n'))
+      setSubmitStatus('error')
+      setTimeout(() => {
+        setSubmitStatus('idle')
+        setErrorMessage('')
+      }, 5000)
+    }
+    
+    setUploadedFiles(prev => [...prev, ...validFiles])
+  }
+
+  const removeFile = (index: number) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== index))
+  }
+
   const onSubmit = async (data: ConsultationFormData) => {
     setSubmitStatus('submitting')
     setErrorMessage('')
+    setUploadProgress(0)
 
     try {
       // Verify reCAPTCHA
@@ -125,6 +161,16 @@ export default function BookingForm() {
         if (!token) {
           throw new Error('reCAPTCHA verification failed. Please try again.')
         }
+      }
+
+      // Upload files if any
+      let fileUrls: string[] = []
+      if (uploadedFiles.length > 0) {
+        setUploadProgress(10)
+        const uploadPromises = uploadedFiles.map(file => uploadFile(file))
+        const uploadResults = await Promise.all(uploadPromises)
+        fileUrls = uploadResults.map(result => result.url)
+        setUploadProgress(50)
       }
 
       // Sanitize all inputs
@@ -136,7 +182,10 @@ export default function BookingForm() {
         destination_country: sanitizeInput(data.destination_country),
         service_type: sanitizeInput(data.service_type),
         message: data.message ? sanitizeInput(data.message) : '',
+        document_urls: fileUrls.length > 0 ? fileUrls.join(',') : null,
       }
+
+      setUploadProgress(75)
 
       // Submit to Supabase
       const { error } = await supabase.from(Tables.CONSULTATION_REQUESTS).insert([sanitizedData])
@@ -146,18 +195,20 @@ export default function BookingForm() {
         throw new Error('Failed to submit your request. Please try again.')
       }
 
+      setUploadProgress(100)
       setSubmitStatus('success')
       reset()
+      setUploadedFiles([])
+      setUploadProgress(0)
 
       // Reset success message after 10 seconds
       setTimeout(() => {
-        if (submitStatus === 'success') {
-          setSubmitStatus('idle')
-        }
+        setSubmitStatus('idle')
       }, 10000)
     } catch (error) {
       console.error('Form submission error:', error)
       setSubmitStatus('error')
+      setUploadProgress(0)
       setErrorMessage(
         error instanceof Error
           ? error.message
@@ -296,6 +347,117 @@ export default function BookingForm() {
                 className={cn(errors.message && 'border-error')}
               />
               {errors.message && <p className="form-error">{errors.message.message}</p>}
+            </div>
+
+            {/* File Upload */}
+            <div className="form-group mb-md">
+              <label htmlFor="documents" className="flex items-center gap-2">
+                📎 Upload Documents (Optional)
+                <span className="text-xs text-text-light font-normal">
+                  Passport, visa documents, etc. (Max 10MB each)
+                </span>
+              </label>
+              
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-md hover:border-primary transition-colors">
+                <input
+                  type="file"
+                  id="documents"
+                  onChange={handleFileChange}
+                  multiple
+                  accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx"
+                  className="hidden"
+                  disabled={submitStatus === 'submitting'}
+                />
+                <label
+                  htmlFor="documents"
+                  className="flex flex-col items-center justify-center cursor-pointer"
+                >
+                  <svg
+                    className="w-12 h-12 text-gray-400 mb-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    />
+                  </svg>
+                  <p className="text-sm text-text-light">
+                    <span className="text-primary font-medium">Click to upload</span> or drag and drop
+                  </p>
+                  <p className="text-xs text-text-light mt-1">
+                    PDF, JPG, PNG, WEBP, DOC, DOCX (Max 10MB per file)
+                  </p>
+                </label>
+              </div>
+
+              {/* Uploaded Files List */}
+              {uploadedFiles.length > 0 && (
+                <div className="mt-sm space-y-2">
+                  {uploadedFiles.map((file, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between bg-gray-50 p-sm rounded-lg border border-gray-200"
+                    >
+                      <div className="flex items-center gap-2 flex-1 min-w-0">
+                        <svg
+                          className="w-5 h-5 text-primary flex-shrink-0"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                          />
+                        </svg>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-gray-900 truncate">{file.name}</p>
+                          <p className="text-xs text-gray-500">
+                            {(file.size / 1024 / 1024).toFixed(2)} MB
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeFile(index)}
+                        className="ml-2 text-error hover:text-red-700 flex-shrink-0"
+                        disabled={submitStatus === 'submitting'}
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Upload Progress */}
+              {uploadProgress > 0 && uploadProgress < 100 && (
+                <div className="mt-sm">
+                  <div className="flex justify-between text-xs text-text-light mb-1">
+                    <span>Uploading documents...</span>
+                    <span>{uploadProgress}%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      className="bg-primary h-2 rounded-full transition-all duration-300"
+                      style={{ width: `${uploadProgress}%` }}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Error Alert */}

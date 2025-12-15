@@ -1,279 +1,177 @@
-# Immigrant Support Network
+# Supabase CLI
 
-A modern, secure, and GDPR-compliant immigration consultation platform built with React, TypeScript, and Tailwind CSS.
+[![Coverage Status](https://coveralls.io/repos/github/supabase/cli/badge.svg?branch=main)](https://coveralls.io/github/supabase/cli?branch=main) [![Bitbucket Pipelines](https://img.shields.io/bitbucket/pipelines/supabase-cli/setup-cli/master?style=flat-square&label=Bitbucket%20Canary)](https://bitbucket.org/supabase-cli/setup-cli/pipelines) [![Gitlab Pipeline Status](https://img.shields.io/gitlab/pipeline-status/sweatybridge%2Fsetup-cli?label=Gitlab%20Canary)
+](https://gitlab.com/sweatybridge/setup-cli/-/pipelines)
 
-## 🚀 Features
+[Supabase](https://supabase.io) is an open source Firebase alternative. We're building the features of Firebase using enterprise-grade open source tools.
 
-### Core Functionality
-- ✅ Free consultation booking system
-- ✅ Comprehensive service information
-- ✅ Mobile-responsive design
-- ✅ Smooth scrolling navigation
-- 🤖 **AI Chat Assistant**: GPT-4 powered immigration assistant (auto-enables after 6 months)
+This repository contains all the functionality for Supabase CLI.
 
-### Security & Privacy
-- 🔒 **Form Validation**: React Hook Form + Zod schema validation
-- 🤖 **Bot Protection**: Google reCAPTCHA v3 integration
-- 🛡️ **Input Sanitization**: DOMPurify for XSS prevention
-- 🚦 **Rate Limiting**: Supabase Edge Functions
-- 📋 **GDPR Compliance**: Cookie consent, Privacy Policy, Terms of Service
-- 🔐 **Security Headers**: CSP, XSS Protection, Frame Options
+- [x] Running Supabase locally
+- [x] Managing database migrations
+- [x] Creating and deploying Supabase Functions
+- [x] Generating types directly from your database schema
+- [x] Making authenticated HTTP requests to [Management API](https://supabase.com/docs/reference/api/introduction)
 
-### Development & Monitoring
-- 🐛 **Error Tracking**: Sentry integration
-- 📊 **Type Safety**: Full TypeScript with strict mode
-- 🎨 **Modern Styling**: Tailwind CSS with custom design system
-- ✨ **Code Quality**: ESLint + Prettier
-- 🗄️ **Database**: Supabase with Row Level Security (RLS)
+## Getting started
 
-## 📋 Tech Stack
+### Install the CLI
 
-- **Frontend**: React 18.2, TypeScript 5.2
-- **Styling**: Tailwind CSS 3.4
-- **Form Handling**: React Hook Form + Zod validation
-- **Database**: Supabase (PostgreSQL with RLS)
-- **Security**: reCAPTCHA v3, DOMPurify, Rate Limiting
-- **AI**: OpenAI GPT-4 Turbo (intelligent chat assistant)
-- **Monitoring**: Sentry error tracking
-- **Build Tool**: Vite 5.0
-- **Code Quality**: ESLint, Prettier
-
-## 🛠️ Setup Instructions
-
-### 1. Clone and Install
+Available via [NPM](https://www.npmjs.com) as dev dependency. To install:
 
 ```bash
-git clone <repository-url>
-cd immgrant
-npm install
+npm i supabase --save-dev
 ```
 
-### 2. Environment Variables
+When installing with yarn 4, you need to disable experimental fetch with the following nodejs config.
 
-Create a `.env` file in the root directory. See `ENV_SETUP.md` for detailed instructions.
-
-Required variables:
-```env
-VITE_SUPABASE_URL=your_supabase_project_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-VITE_RECAPTCHA_SITE_KEY=your_recaptcha_site_key
+```
+NODE_OPTIONS=--no-experimental-fetch yarn add supabase
 ```
 
-Optional variables:
-```env
-VITE_SENTRY_DSN=your_sentry_dsn
-VITE_OPENAI_API_KEY=your_openai_api_key
-VITE_ENABLE_AI_CHAT=false
-VITE_ENV=development
-```
+> **Note**
+For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency](https://bun.sh/guides/install/trusted) before running `bun add -D supabase`.
 
-**📚 See `ENV_SETUP.md` for detailed setup instructions**
+<details>
+  <summary><b>macOS</b></summary>
 
-### 3. Database Setup
+  Available via [Homebrew](https://brew.sh). To install:
 
-Run the Supabase migration:
+  ```sh
+  brew install supabase/tap/supabase
+  ```
+
+  To install the beta release channel:
+  
+  ```sh
+  brew install supabase/tap/supabase-beta
+  brew link --overwrite supabase-beta
+  ```
+  
+  To upgrade:
+
+  ```sh
+  brew upgrade supabase
+  ```
+</details>
+
+<details>
+  <summary><b>Windows</b></summary>
+
+  Available via [Scoop](https://scoop.sh). To install:
+
+  ```powershell
+  scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
+  scoop install supabase
+  ```
+
+  To upgrade:
+
+  ```powershell
+  scoop update supabase
+  ```
+</details>
+
+<details>
+  <summary><b>Linux</b></summary>
+
+  Available via [Homebrew](https://brew.sh) and Linux packages.
+
+  #### via Homebrew
+
+  To install:
+
+  ```sh
+  brew install supabase/tap/supabase
+  ```
+
+  To upgrade:
+
+  ```sh
+  brew upgrade supabase
+  ```
+
+  #### via Linux packages
+
+  Linux packages are provided in [Releases](https://github.com/supabase/cli/releases). To install, download the `.apk`/`.deb`/`.rpm`/`.pkg.tar.zst` file depending on your package manager and run the respective commands.
+
+  ```sh
+  sudo apk add --allow-untrusted <...>.apk
+  ```
+
+  ```sh
+  sudo dpkg -i <...>.deb
+  ```
+
+  ```sh
+  sudo rpm -i <...>.rpm
+  ```
+
+  ```sh
+  sudo pacman -U <...>.pkg.tar.zst
+  ```
+</details>
+
+<details>
+  <summary><b>Other Platforms</b></summary>
+
+  You can also install the CLI via [go modules](https://go.dev/ref/mod#go-install) without the help of package managers.
+
+  ```sh
+  go install github.com/supabase/cli@latest
+  ```
+
+  Add a symlink to the binary in `$PATH` for easier access:
+
+  ```sh
+  ln -s "$(go env GOPATH)/bin/cli" /usr/bin/supabase
+  ```
+
+  This works on other non-standard Linux distros.
+</details>
+
+<details>
+  <summary><b>Community Maintained Packages</b></summary>
+
+  Available via [pkgx](https://pkgx.sh/). Package script [here](https://github.com/pkgxdev/pantry/blob/main/projects/supabase.com/cli/package.yml).
+  To install in your working directory:
+
+  ```bash
+  pkgx install supabase
+  ```
+
+  Available via [Nixpkgs](https://nixos.org/). Package script [here](https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/supabase-cli/default.nix).
+</details>
+
+### Run the CLI
 
 ```bash
-# If using Supabase CLI
-supabase db push
-
-# Or manually run the SQL file in Supabase dashboard
-# File: supabase/migrations/20251214200420_create_consultation_requests.sql
+supabase bootstrap
 ```
 
-### 4. Run Development Server
+Or using npx:
 
 ```bash
-npm run dev
+npx supabase bootstrap
 ```
 
-The app will be available at `http://localhost:3000`
+The bootstrap command will guide you through the process of setting up a Supabase project using one of the [starter](https://github.com/supabase-community/supabase-samples/blob/main/samples.json) templates.
 
-### 5. Build for Production
+## Docs
 
-```bash
-npm run build
-npm run preview  # Preview production build
+Command & config reference can be found [here](https://supabase.com/docs/reference/cli/about).
+
+## Breaking changes
+
+We follow semantic versioning for changes that directly impact CLI commands, flags, and configurations.
+
+However, due to dependencies on other service images, we cannot guarantee that schema migrations, seed.sql, and generated types will always work for the same CLI major version. If you need such guarantees, we encourage you to pin a specific version of CLI in package.json.
+
+## Developing
+
+To run from source:
+
+```sh
+# Go >= 1.22
+go run . help
 ```
-
-## 📦 Project Structure
-
-```
-immgrant/
-├── src/
-│   ├── components/          # React components
-│   │   ├── BookingForm.tsx  # Main consultation form
-│   │   ├── CookieConsent.tsx # GDPR cookie consent
-│   │   ├── Header.tsx       # Navigation header
-│   │   ├── Hero.tsx         # Landing hero section
-│   │   ├── Services.tsx     # Services showcase
-│   │   ├── HowItWorks.tsx   # Process explanation
-│   │   ├── WhyChooseUs.tsx  # Benefits section
-│   │   └── Footer.tsx       # Site footer
-│   ├── contexts/            # React contexts
-│   │   └── RecaptchaProvider.tsx
-│   ├── hooks/               # Custom React hooks
-│   │   └── useRecaptcha.ts
-│   ├── lib/                 # Utility functions
-│   │   ├── config.ts        # App configuration
-│   │   ├── sanitize.ts      # Input sanitization
-│   │   ├── sentry.ts        # Error tracking
-│   │   ├── supabase.ts      # Database client
-│   │   ├── utils.ts         # Helper functions
-│   │   └── validation.ts    # Zod schemas
-│   ├── pages/               # Full page components
-│   │   ├── PrivacyPolicy.tsx
-│   │   └── TermsOfService.tsx
-│   ├── App.tsx              # Main app component
-│   ├── main.tsx             # Entry point
-│   └── index.css            # Tailwind CSS imports
-├── supabase/
-│   ├── migrations/          # Database migrations
-│   └── functions/           # Edge Functions
-│       └── rate-limit/      # Rate limiting function
-├── .eslintrc.cjs            # ESLint configuration
-├── .prettierrc              # Prettier configuration
-├── tailwind.config.js       # Tailwind configuration
-├── tsconfig.json            # TypeScript configuration
-└── vite.config.ts           # Vite configuration
-```
-
-## 🔐 Security Features
-
-### 1. Form Security
-- **Validation**: Zod schema validation on client-side
-- **Sanitization**: DOMPurify removes malicious content
-- **Bot Protection**: reCAPTCHA v3 invisible verification
-- **Rate Limiting**: Max 3 submissions per IP per 15 minutes
-
-### 2. Database Security
-- **Row Level Security (RLS)**: Enabled on all tables
-- **Policies**: Anonymous users can only INSERT, authenticated users can view/manage
-- **Type Safety**: Full TypeScript types for database operations
-
-### 3. Application Security
-- **Security Headers**: CSP, XSS Protection, Frame Options, etc.
-- **Input Validation**: Both client-side and server-side
-- **Error Handling**: Sentry for error tracking and monitoring
-- **HTTPS Only**: Enforced in production
-
-## 🤖 AI Chat Assistant
-
-The platform includes an intelligent GPT-4 powered chat assistant that understands immigration queries.
-
-### Features:
-- ✅ Trained on your business (services, pricing, values)
-- ✅ Natural language understanding
-- ✅ Lead qualification
-- ✅ 24/7 availability
-- ✅ Handles refusal cases intelligently
-- ✅ Differentiates between ISN and Immigration AI
-
-### Auto-Enable Schedule:
-- **Launch Date**: December 15, 2025
-- **Auto-Enable Date**: June 15, 2026 (6 months later)
-- **Current Status**: Hidden (testable via `?testchat=true`)
-
-### Testing Before Launch:
-```bash
-# Visit with test flag
-http://localhost:3000/?testchat=true
-
-# Or enable in .env
-VITE_ENABLE_AI_CHAT=true
-```
-
-### Cost:
-- GPT-4: ~$10-20/month for 1,000 conversations
-- GPT-3.5: ~$1-3/month for 1,000 conversations
-
-### Documentation:
-- **Quick Start**: See `AI_CHAT_QUICKSTART.md` (5 minutes)
-- **Full Guide**: See `AI_CHAT_GUIDE.md` (complete documentation)
-- **Knowledge Base**: Edit `src/lib/aiKnowledgeBase.ts`
-
-## 📊 GDPR Compliance
-
-- ✅ Cookie consent banner
-- ✅ Privacy Policy page
-- ✅ Terms of Service page
-- ✅ Data retention policies
-- ✅ User rights documentation (access, rectification, erasure, etc.)
-- ✅ Clear data processing disclosure
-
-## 🚀 Deployment
-
-### Vercel (Recommended)
-
-1. Push code to GitHub
-2. Import project in Vercel
-3. Add environment variables in Vercel dashboard
-4. Deploy!
-
-The `vercel.json` file includes all necessary security headers.
-
-### Other Platforms
-
-Ensure these environment variables are set:
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_ANON_KEY`
-- `VITE_RECAPTCHA_SITE_KEY`
-
-## 🧪 Testing Checklist
-
-- [ ] Form validation works correctly
-- [ ] reCAPTCHA verification triggers
-- [ ] Rate limiting prevents spam (test 4+ submissions)
-- [ ] Cookie consent banner appears for new visitors
-- [ ] Privacy Policy and Terms pages are accessible
-- [ ] All links work correctly
-- [ ] Mobile responsive design works
-- [ ] Error messages display properly
-- [ ] Success message shows after form submission
-- [ ] Supabase data is correctly stored
-- [ ] AI Chat works with `?testchat=true`
-- [ ] WhatsApp button functions correctly
-- [ ] Immigration AI partnership section displays
-
-## 📝 Available Scripts
-
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run preview      # Preview production build
-npm run lint         # Run ESLint
-npm run lint:fix     # Fix ESLint errors
-npm run format       # Format code with Prettier
-```
-
-## 🔧 Configuration
-
-### Tailwind CSS
-Custom colors and spacing defined in `tailwind.config.js` to match the original design system.
-
-### TypeScript
-Strict mode enabled with comprehensive type checking.
-
-### ESLint & Prettier
-Configured for React, TypeScript, and Tailwind CSS best practices.
-
-## 📄 License
-
-[Your License Here]
-
-## 🤝 Support
-
-For questions or issues:
-- Email: info@immigrantsupportnetwork.com
-- Create an issue in this repository
-
-## 📚 Additional Resources
-
-- See `ENV_SETUP.md` for environment variable setup
-- See Privacy Policy in `/src/pages/PrivacyPolicy.tsx`
-- See Terms of Service in `/src/pages/TermsOfService.tsx`
-
----
-
-**Version 2.0.0** - Complete modernization with security, GDPR compliance, and Tailwind CSS
-
