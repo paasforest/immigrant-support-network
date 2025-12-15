@@ -24,16 +24,9 @@ VITE_ENABLE_AI_CHAT=false
 
 # Environment
 VITE_ENV=development
-
-# Storage Configuration (for external storage like S3/R2)
-VITE_STORAGE_ENDPOINT=your_storage_endpoint_here
-VITE_STORAGE_ACCESS_KEY=your_storage_access_key_here
-VITE_STORAGE_SECRET_KEY=your_storage_secret_key_here
-VITE_STORAGE_BUCKET=your_bucket_name_here
-
-# API Rate Limiting
-VITE_API_URL=your_edge_function_url_here
 ```
+
+**Note:** Storage credentials (S3/Hetzner) are stored **securely in Supabase Edge Function secrets** and are NOT in the `.env` file. See `HETZNER_STORAGE_SETUP.md` for configuration.
 
 ## How to Get These Values
 
@@ -58,9 +51,10 @@ VITE_API_URL=your_edge_function_url_here
 - Copy the key (starts with sk-...)
 - Initial $5 credit is enough for ~500-1000 conversations!
 
-### 5. Storage (S3/R2/etc)
-- Configure your preferred storage provider
-- Add credentials here
+### 5. Storage (Hetzner Object Storage)
+- Storage credentials are **NOT** in `.env` (security risk!)
+- They are stored in **Supabase Edge Function secrets**
+- See `HETZNER_STORAGE_SETUP.md` for full setup guide
 
 ## AI Chat Feature
 

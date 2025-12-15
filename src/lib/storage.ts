@@ -1,18 +1,5 @@
-import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
-import { Upload } from '@aws-sdk/lib-storage';
+import { supabase } from './supabase';
 
-// Initialize S3 client for Hetzner Object Storage
-const s3Client = new S3Client({
-  endpoint: import.meta.env.VITE_S3_ENDPOINT,
-  region: import.meta.env.VITE_S3_REGION,
-  credentials: {
-    accessKeyId: import.meta.env.VITE_S3_ACCESS_KEY_ID,
-    secretAccessKey: import.meta.env.VITE_S3_SECRET_ACCESS_KEY,
-  },
-  forcePathStyle: true, // Required for Hetzner Object Storage
-});
-
-const BUCKET_NAME = import.meta.env.VITE_S3_BUCKET_NAME;
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
 export interface UploadResult {
@@ -65,7 +52,7 @@ export function generateFileKey(file: File, prefix: string = 'documents'): strin
 }
 
 /**
- * Upload file to Hetzner Object Storage
+ * Upload file to Hetzner Object Storage via Supabase Edge Function
  */
 export async function uploadFile(
   file: File,
@@ -77,68 +64,60 @@ export async function uploadFile(
     throw new Error(validation.error);
   }
 
-  const key = generateFileKey(file);
-
   try {
-    const upload = new Upload({
-      client: s3Client,
-      params: {
-        Bucket: BUCKET_NAME,
-        Key: key,
-        Body: file,
-        ContentType: file.type,
-        // Make files private by default
-        ACL: 'private',
+    // Create form data
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Get Supabase URL for edge function
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const uploadUrl = `${supabaseUrl}/functions/v1/upload-file`;
+
+    // Get auth token
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    // Upload via Supabase Edge Function (secure server-side)
+    const response = await fetch(uploadUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_ANON_KEY}`,
       },
+      body: formData,
     });
 
-    // Track upload progress
-    if (onProgress) {
-      upload.on('httpUploadProgress', (progress) => {
-        if (progress.loaded && progress.total) {
-          const percentage = Math.round((progress.loaded / progress.total) * 100);
-          onProgress(percentage);
-        }
-      });
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to upload file');
     }
 
-    await upload.done();
+    const result: UploadResult = await response.json();
 
-    // Generate the file URL
-    const url = `${import.meta.env.VITE_S3_ENDPOINT}/${BUCKET_NAME}/${key}`;
+    // Simulate progress for UX (since we can't track real progress easily)
+    if (onProgress) {
+      onProgress(100);
+    }
 
-    return {
-      url,
-      key,
-      size: file.size,
-    };
+    return result;
   } catch (error) {
     console.error('Error uploading file:', error);
-    throw new Error('Failed to upload file. Please try again.');
+    throw new Error(error instanceof Error ? error.message : 'Failed to upload file. Please try again.');
   }
 }
 
 /**
- * Delete file from storage
+ * Delete file from storage (would require separate edge function)
  */
 export async function deleteFile(key: string): Promise<void> {
-  try {
-    const command = new DeleteObjectCommand({
-      Bucket: BUCKET_NAME,
-      Key: key,
-    });
-
-    await s3Client.send(command);
-  } catch (error) {
-    console.error('Error deleting file:', error);
-    throw new Error('Failed to delete file');
-  }
+  // TODO: Implement delete via Supabase Edge Function if needed
+  console.warn('Delete functionality not yet implemented');
+  throw new Error('Delete functionality not yet implemented');
 }
 
 /**
- * Get file URL from key
+ * Get file URL from key (files are already returned with full URL from upload)
  */
-export function getFileUrl(key: string): string {
-  return `${import.meta.env.VITE_S3_ENDPOINT}/${BUCKET_NAME}/${key}`;
+export function getFileUrl(url: string): string {
+  return url;
 }
+
 
