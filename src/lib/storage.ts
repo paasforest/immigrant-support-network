@@ -71,7 +71,7 @@ export async function uploadFile(
 
     // Get Supabase URL for edge function
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-    const uploadUrl = `${supabaseUrl}/functions/v1/upload-file`;
+    const uploadUrl = `${supabaseUrl}/functions/v1/rapid-task`;
 
     // Get auth token
     const { data: { session } } = await supabase.auth.getSession();
