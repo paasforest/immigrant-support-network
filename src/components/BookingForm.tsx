@@ -173,14 +173,14 @@ export default function BookingForm() {
         setUploadProgress(50)
       }
 
-      // Sanitize all inputs
+      // Sanitize all inputs (match database column names)
       const sanitizedData = {
         full_name: sanitizeInput(data.full_name),
         email: sanitizeInput(data.email.toLowerCase()),
         phone: sanitizeInput(data.phone),
-        current_country: sanitizeInput(data.current_country),
-        destination_country: sanitizeInput(data.destination_country),
-        service_type: sanitizeInput(data.service_type),
+        country_of_birth: sanitizeInput(data.current_country),
+        destination: sanitizeInput(data.destination_country),
+        preferred_contact: sanitizeInput(data.service_type),
         message: data.message ? sanitizeInput(data.message) : '',
         document_urls: fileUrls.length > 0 ? fileUrls.join(',') : null,
       }
