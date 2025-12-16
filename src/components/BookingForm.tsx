@@ -178,7 +178,7 @@ export default function BookingForm() {
         full_name: sanitizeInput(data.full_name),
         email: sanitizeInput(data.email.toLowerCase()),
         phone: sanitizeInput(data.phone),
-        country_of_origin: sanitizeInput(data.current_country),
+        country_of_birth: sanitizeInput(data.current_country),
         destination_country: sanitizeInput(data.destination_country),
         preferred_contact: sanitizeInput(data.service_type),
         message: data.message ? sanitizeInput(data.message) : '',
