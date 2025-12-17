@@ -202,7 +202,7 @@ export default function BookingForm() {
         const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
         const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
         
-        await fetch(`${supabaseUrl}/functions/v1/send-notification`, {
+        await fetch(`${supabaseUrl}/functions/v1/rapid-processor`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
