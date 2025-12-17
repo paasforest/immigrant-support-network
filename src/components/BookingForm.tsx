@@ -195,6 +195,29 @@ export default function BookingForm() {
         throw new Error('Failed to submit your request. Please try again.')
       }
 
+      setUploadProgress(90)
+
+      // Send email notification (non-blocking - don't fail if email fails)
+      try {
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+        const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+        
+        await fetch(`${supabaseUrl}/functions/v1/send-notification`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${supabaseAnonKey}`,
+          },
+          body: JSON.stringify(sanitizedData),
+        })
+        // Email sent successfully (or failed silently - form still succeeds)
+      } catch (emailError) {
+        // Don't fail the form submission if email fails
+        if (import.meta.env.DEV) {
+          console.error('Email notification failed:', emailError)
+        }
+      }
+
       setUploadProgress(100)
       setSubmitStatus('success')
       reset()
