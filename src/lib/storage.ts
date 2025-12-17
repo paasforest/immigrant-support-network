@@ -108,8 +108,7 @@ export async function uploadFile(
  * Delete file from storage (would require separate edge function)
  */
 export async function deleteFile(_key: string): Promise<void> {
-  // TODO: Implement delete via Supabase Edge Function if needed
-  console.warn('Delete functionality not yet implemented');
+  // Delete functionality not yet implemented
   throw new Error('Delete functionality not yet implemented');
 }
 

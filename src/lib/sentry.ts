@@ -31,9 +31,8 @@ export function initSentry() {
         return event
       },
     })
-  } else {
-    console.log('Sentry not initialized (development mode or missing DSN)')
   }
+  // Silently continue without Sentry in development
 }
 
 /**
@@ -53,9 +52,8 @@ export function captureException(error: Error, context?: Record<string, unknown>
 export function captureMessage(message: string, level: Sentry.SeverityLevel = 'info') {
   if (config.sentry.dsn) {
     Sentry.captureMessage(message, level)
-  } else {
-    console.log(`[${level}]`, message)
   }
+  // Silent in development - no console logs
 }
 
 

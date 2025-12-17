@@ -10,7 +10,7 @@ export function RecaptchaProvider({ children }: RecaptchaProviderProps) {
 
   // If no reCAPTCHA key is configured, render children without provider
   if (!recaptchaSiteKey) {
-    console.warn('reCAPTCHA site key not configured. Bot protection is disabled.')
+    // reCAPTCHA is optional - silently continue without it
     return <>{children}</>
   }
 

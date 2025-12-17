@@ -34,7 +34,6 @@ export function isAIChatEnabled(): boolean {
   const now = new Date()
   const autoEnabled = now >= AI_CHAT_AUTO_ENABLE_DATE
   if (autoEnabled) {
-    console.log('🎉 AI Chat auto-enabled after 6 months!')
     return true
   }
 
@@ -64,17 +63,19 @@ export function getAIChatAutoEnableDate(): string {
 }
 
 /**
- * Log feature flags status (for debugging)
+ * Log feature flags status (for debugging in development only)
  */
 export function logFeatureFlagsStatus(): void {
-  console.log('🚩 Feature Flags Status:')
-  console.log('---')
-  console.log(`Launch Date: ${LAUNCH_DATE.toLocaleDateString()}`)
-  console.log(`AI Chat Auto-Enable Date: ${getAIChatAutoEnableDate()}`)
-  console.log(`Days Until Auto-Enable: ${getDaysUntilAIChatEnabled()}`)
-  console.log(`AI Chat Enabled: ${isAIChatEnabled()}`)
-  console.log('---')
-  console.log('💡 To test AI Chat now: Add ?testchat=true to URL')
-  console.log('💡 To enable manually: Set VITE_ENABLE_AI_CHAT=true in .env')
+  if (import.meta.env.DEV) {
+    console.log('🚩 Feature Flags Status:')
+    console.log('---')
+    console.log(`Launch Date: ${LAUNCH_DATE.toLocaleDateString()}`)
+    console.log(`AI Chat Auto-Enable Date: ${getAIChatAutoEnableDate()}`)
+    console.log(`Days Until Auto-Enable: ${getDaysUntilAIChatEnabled()}`)
+    console.log(`AI Chat Enabled: ${isAIChatEnabled()}`)
+    console.log('---')
+    console.log('💡 To test AI Chat now: Add ?testchat=true to URL')
+    console.log('💡 To enable manually: Set VITE_ENABLE_AI_CHAT=true in .env')
+  }
 }
 

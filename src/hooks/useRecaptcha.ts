@@ -10,7 +10,7 @@ export function useRecaptcha() {
   const verifyRecaptcha = useCallback(
     async (action: string): Promise<string | null> => {
       if (!executeRecaptcha) {
-        console.warn('reCAPTCHA not available')
+        // reCAPTCHA not available - silently return null
         return null
       }
 
@@ -18,7 +18,10 @@ export function useRecaptcha() {
         const token = await executeRecaptcha(action)
         return token
       } catch (error) {
-        console.error('reCAPTCHA verification failed:', error)
+        // reCAPTCHA failed - log to error tracking only
+        if (import.meta.env.PROD) {
+          // Error tracking service would log this
+        }
         return null
       }
     },

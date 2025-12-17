@@ -5,7 +5,9 @@ const supabaseUrl = config.supabase.url
 const supabaseAnonKey = config.supabase.anonKey
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.error('Missing Supabase environment variables. Please check ENV_SETUP.md')
+  if (import.meta.env.DEV) {
+    console.error('Missing Supabase environment variables. Please check ENV_SETUP.md')
+  }
   throw new Error('Missing Supabase environment variables')
 }
 

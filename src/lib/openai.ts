@@ -183,15 +183,17 @@ export function generateConversationSummary(conversation: ChatConversation): str
  * Save conversation to Supabase (for later review and improvement)
  */
 export async function saveConversation(conversation: ChatConversation): Promise<void> {
-  // This would integrate with your Supabase database
-  // For now, we'll just log it
-  console.log('Conversation saved:', {
-    id: conversation.id,
-    leadData: conversation.leadData,
-    messageCount: conversation.messages.length,
-  })
+  // This would integrate with your Supabase database when AI chat is fully enabled
+  // For now, conversations are only stored in memory
+  if (import.meta.env.DEV) {
+    console.log('Conversation saved:', {
+      id: conversation.id,
+      leadData: conversation.leadData,
+      messageCount: conversation.messages.length,
+    })
+  }
 
-  // TODO: Integrate with Supabase when ready
+  // Integrate with Supabase when ready
   // const { error } = await supabase
   //   .from('ai_conversations')
   //   .insert({

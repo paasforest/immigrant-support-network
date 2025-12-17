@@ -33,7 +33,8 @@ export function validateConfig() {
     .filter(([, value]) => !value)
     .map(([key]) => key)
 
-  if (missing.length > 0) {
+  if (missing.length > 0 && import.meta.env.DEV) {
+    // Only show in development
     console.error('Missing required environment variables:', missing)
     console.error('Please check your .env file. See ENV_SETUP.md for details.')
   }
