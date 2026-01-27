@@ -17,6 +17,7 @@ import BookingForm from './components/BookingForm'
 import Footer from './components/Footer'
 import CookieConsent from './components/CookieConsent'
 import WhatsAppButton from './components/WhatsAppButton'
+import FloatingCTA from './components/FloatingCTA'
 import AIChatWidget from './components/AIChatWidget'
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
         <Footer />
         <CookieConsent />
         <WhatsAppButton />
+        <FloatingCTA />
         {/* AI Chat Widget - Auto-enables after 6 months or via ?testchat=true */}
         {isAIChatEnabled() && <AIChatWidget />}
       </div>
