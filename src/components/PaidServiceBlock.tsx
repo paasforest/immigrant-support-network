@@ -1,4 +1,5 @@
 import { scrollToElement } from '../lib/utils'
+import ProgressBar from './ProgressBar'
 
 export default function PaidServiceBlock() {
   const handleAssessmentClick = () => {
@@ -9,12 +10,9 @@ export default function PaidServiceBlock() {
     <section className="py-xxl bg-gradient-to-br from-blue-50 to-white border-b-4 border-blue-600">
       <div className="container">
         <div className="max-w-5xl mx-auto">
-          {/* Urgency Banner */}
-          <div className="text-center mb-md">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-100 border-2 border-red-500 rounded-full">
-              <span className="text-red-600 font-bold">⚡ LIMITED SPOTS THIS WEEK</span>
-              <span className="text-red-700 text-sm">Only 12 assessments available</span>
-            </div>
+          {/* Progress Bar */}
+          <div className="mb-md">
+            <ProgressBar />
           </div>
 
           <div className="bg-white border-2 border-blue-600 rounded-xl shadow-2xl overflow-hidden">
