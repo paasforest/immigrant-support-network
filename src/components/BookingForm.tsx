@@ -202,20 +202,60 @@ export default function BookingForm() {
         const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
         const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
         
-        await fetch(`${supabaseUrl}/functions/v1/rapid-processor`, {
+        if (!supabaseUrl || !supabaseAnonKey) {
+          throw new Error('Missing Supabase configuration')
+        }
+
+        // Prepare email data matching the edge function interface
+        const emailData = {
+          full_name: sanitizedData.full_name,
+          email: sanitizedData.email,
+          phone: sanitizedData.phone,
+          country_of_birth: sanitizedData.country_of_birth,
+          destination_country: sanitizedData.destination_country,
+          preferred_contact: sanitizedData.preferred_contact,
+          message: sanitizedData.message || '',
+          document_urls: sanitizedData.document_urls || '',
+        }
+
+        const emailResponse = await fetch(`${supabaseUrl}/functions/v1/send-notification`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${supabaseAnonKey}`,
           },
-          body: JSON.stringify(sanitizedData),
+          body: JSON.stringify(emailData),
         })
-        // Email sent successfully (or failed silently - form still succeeds)
-      } catch (emailError) {
-        // Don't fail the form submission if email fails
-        if (import.meta.env.DEV) {
-          console.error('Email notification failed:', emailError)
+
+        if (!emailResponse.ok) {
+          const errorText = await emailResponse.text()
+          throw new Error(`Email service returned ${emailResponse.status}: ${errorText}`)
         }
+
+        const emailResult = await emailResponse.json()
+        
+        // Log success in dev mode
+        if (import.meta.env.DEV) {
+          console.log('Email notification sent successfully:', emailResult)
+        }
+      } catch (emailError) {
+        // Don't fail the form submission if email fails, but log it
+        console.error('Email notification failed:', emailError)
+        
+        // In production, you might want to send this to an error tracking service
+        if (import.meta.env.DEV) {
+          console.error('Email error details:', {
+            error: emailError instanceof Error ? emailError.message : String(emailError),
+            supabaseUrl: import.meta.env.VITE_SUPABASE_URL ? 'configured' : 'missing',
+            supabaseKey: import.meta.env.VITE_SUPABASE_ANON_KEY ? 'configured' : 'missing',
+          })
+        }
+        
+        // Optionally capture to Sentry in production
+        captureException(emailError instanceof Error ? emailError : new Error(String(emailError)), {
+          form: 'consultation_booking',
+          step: 'email_notification',
+        })
       }
 
       setUploadProgress(100)
