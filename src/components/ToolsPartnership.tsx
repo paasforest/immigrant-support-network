@@ -274,7 +274,7 @@ export default function ToolsPartnership() {
               }}
               className="btn btn-primary"
             >
-              Book Free Consultation
+              Not ready yet? Book a free consultation
             </button>
           </div>
         </div>
