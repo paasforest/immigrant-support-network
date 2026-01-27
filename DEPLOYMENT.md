@@ -1,236 +1,228 @@
 # Deployment Guide
 
-## Quick Start - Vercel Deployment
+This guide will walk you through deploying your Immigrant Support Network application to production.
 
-### Step 1: Prepare Your Repository
+## Prerequisites
 
-1. Ensure your code is pushed to GitHub
-2. Verify `.env.example` is in the repository (not `.env` or `.env.local`)
+- [ ] Supabase project created and configured
+- [ ] reCAPTCHA v3 keys obtained from Google
+- [ ] (Optional) Sentry project created for error tracking
+- [ ] GitHub repository set up
+- [ ] Vercel account (or alternative hosting platform)
 
-### Step 2: Import to Vercel
+## Step 1: Supabase Setup
 
-1. Go to [vercel.com](https://vercel.com)
-2. Sign in with your GitHub account
-3. Click "Add New Project"
-4. Import your `immigrantsupportnetwork-frontend` repository
-5. Configure the project:
-   - **Framework Preset**: Next.js
-   - **Root Directory**: `./` (leave as default)
-   - **Build Command**: `npm run build`
-   - **Output Directory**: Leave default
+### 1.1 Create Supabase Project
+1. Go to [supabase.com](https://supabase.com)
+2. Create a new project
+3. Wait for project to be provisioned
 
-### Step 3: Configure Environment Variables
+### 1.2 Run Database Migration
+1. Go to SQL Editor in Supabase dashboard
+2. Copy contents of `supabase/migrations/20251214200420_create_consultation_requests.sql`
+3. Paste and run the SQL
+4. Verify the `consultation_requests` table was created
 
-Add these environment variables in Vercel dashboard:
+### 1.3 Get API Credentials
+1. Go to Project Settings > API
+2. Copy the following:
+   - Project URL (VITE_SUPABASE_URL)
+   - anon public key (VITE_SUPABASE_ANON_KEY)
 
-```
-NEXT_PUBLIC_BACKEND_URL=https://your-backend-api-url.com
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
-```
-
-**Important Notes:**
-- Get Supabase credentials from your Supabase project dashboard
-- Replace placeholder values with actual credentials
-- These are public variables (NEXT_PUBLIC_) so they're safe for client-side use
-
-### Step 4: Deploy
-
-1. Click "Deploy"
-2. Wait for build to complete (2-3 minutes)
-3. Once deployed, Vercel will provide a URL like: `https://your-project.vercel.app`
-
-### Step 5: Add Custom Domain
-
-1. Go to Project Settings > Domains
-2. Add `immigrantsupportnetwork.co.za`
-3. Configure DNS records:
-   - **Type**: A Record
-   - **Name**: @ (root domain)
-   - **Value**: 76.76.21.21
-
-   OR
-
-   - **Type**: CNAME
-   - **Name**: www
-   - **Value**: cname.vercel-dns.com
-
-4. Add `www.immigrantsupportnetwork.co.za` as well
-5. Wait for DNS propagation (5-60 minutes)
-
-## Alternative: Manual Deployment
-
-### Using Static Export
-
-This project is configured with `output: 'export'` for static hosting.
+### 1.4 Deploy Edge Function (Optional)
+If using the rate limiting edge function:
 
 ```bash
-# Build static files
-npm run build
+# Install Supabase CLI
+npm install -g supabase
 
-# Output directory: ./out
+# Login to Supabase
+supabase login
+
+# Link to your project
+supabase link --project-ref your-project-ref
+
+# Deploy the function
+supabase functions deploy rate-limit
+
+# Set environment variables for the function
+supabase secrets set RECAPTCHA_SECRET_KEY=your_recaptcha_secret_key
 ```
 
-You can deploy the `out` directory to:
-- **Netlify**: Drag and drop the `out` folder
-- **GitHub Pages**: Push `out` folder to gh-pages branch
-- **AWS S3**: Upload to S3 bucket with static hosting enabled
-- **Any static hosting provider**
+## Step 2: reCAPTCHA Setup
 
-## Post-Deployment Checklist
+### 2.1 Register Your Site
+1. Go to [Google reCAPTCHA Admin](https://www.google.com/recaptcha/admin)
+2. Click "Create" (+)
+3. Fill in:
+   - Label: "Immigrant Support Network"
+   - reCAPTCHA type: reCAPTCHA v3
+   - Domains: Add your production domain (e.g., `immigrantsupportnetwork.com`)
+4. Accept terms and submit
 
-- [ ] Verify all pages load correctly
-- [ ] Test contact form submission
-- [ ] Test AI assistant interaction
-- [ ] Check responsive design on mobile
-- [ ] Verify all internal links work
-- [ ] Test affiliate links (travel deals)
-- [ ] Check SEO meta tags in page source
-- [ ] Test form validation
-- [ ] Verify images load from Pexels
-- [ ] Check browser console for errors
+### 2.2 Get Keys
+- Copy the **Site Key** (VITE_RECAPTCHA_SITE_KEY) - for frontend
+- Copy the **Secret Key** - for backend/Edge Functions
 
-## Environment Variables Explained
+## Step 3: Sentry Setup (Optional but Recommended)
 
-### `NEXT_PUBLIC_BACKEND_URL`
-Your backend API base URL for:
-- AI assistant queries
-- Contact form submissions
-- Future API integrations
+### 3.1 Create Sentry Project
+1. Go to [sentry.io](https://sentry.io)
+2. Create account or sign in
+3. Create new project
+4. Select "React" as platform
+5. Copy the DSN (VITE_SENTRY_DSN)
 
-**Example**: `https://api.immigrantsupportnetwork.co.za`
+## Step 4: Vercel Deployment
 
-### `NEXT_PUBLIC_SUPABASE_URL`
-Your Supabase project URL from the Supabase dashboard.
+### 4.1 Connect Repository
+1. Go to [vercel.com](https://vercel.com)
+2. Click "New Project"
+3. Import your GitHub repository
+4. Framework Preset: Vite
+5. Root Directory: `./`
 
-**Find it**: Supabase Dashboard > Project Settings > API > Project URL
+### 4.2 Configure Environment Variables
+Add the following in Vercel dashboard under "Environment Variables":
 
-### `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-Your Supabase anonymous public key.
-
-**Find it**: Supabase Dashboard > Project Settings > API > Project API keys > anon public
-
-## Connecting Backend API
-
-### AI Assistant Endpoint
-Update `/api/ai/route.ts` to connect to your backend:
-
-```typescript
-const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/ai`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ question }),
-});
+**Required:**
+```
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your_anon_key_here
+VITE_RECAPTCHA_SITE_KEY=your_recaptcha_site_key
 ```
 
-### Contact Form Endpoint
-Update `/api/contact/route.ts` to connect to your backend:
-
-```typescript
-const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/contact`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ name, email, subject, message }),
-});
+**Optional:**
+```
+VITE_SENTRY_DSN=your_sentry_dsn
+VITE_ENV=production
 ```
 
-## Analytics Setup (Google Analytics)
+### 4.3 Deploy
+1. Click "Deploy"
+2. Wait for build to complete
+3. Vercel will provide you with a URL
 
-### Step 1: Get GA4 Measurement ID
+### 4.4 Configure Custom Domain (Optional)
+1. Go to Project Settings > Domains
+2. Add your custom domain
+3. Update DNS records as instructed
+4. Update reCAPTCHA domains to include your custom domain
 
-1. Go to [Google Analytics](https://analytics.google.com)
-2. Create a GA4 property for your website
-3. Copy your Measurement ID (format: `G-XXXXXXXXXX`)
+## Step 5: Post-Deployment Verification
 
-### Step 2: Add to Environment Variables
+### 5.1 Functional Testing
+- [ ] Visit your deployed site
+- [ ] Test form submission
+- [ ] Verify data appears in Supabase dashboard
+- [ ] Check cookie consent banner appears
+- [ ] Test Privacy Policy and Terms pages
+- [ ] Verify navigation works
+- [ ] Test on mobile devices
 
-In Vercel dashboard, add:
-```
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
-```
+### 5.2 Security Testing
+- [ ] Verify HTTPS is enforced
+- [ ] Check security headers (use securityheaders.com)
+- [ ] Test reCAPTCHA verification
+- [ ] Test rate limiting (submit form 4+ times)
+- [ ] Verify input sanitization
 
-### Step 3: Add Script to Layout
+### 5.3 Performance Testing
+- [ ] Run Lighthouse audit (aim for 90+ scores)
+- [ ] Test page load speed
+- [ ] Verify images are optimized
+- [ ] Check mobile performance
 
-Update `app/layout.tsx`:
+## Step 6: Update reCAPTCHA Domain
 
-```typescript
-import Script from 'next/script';
+After deployment, add your production domain to reCAPTCHA:
+1. Go back to [Google reCAPTCHA Admin](https://www.google.com/recaptcha/admin)
+2. Select your site
+3. Click Settings (gear icon)
+4. Add your production domain to the domains list
+5. Save
 
-// In the component
-<Script
-  src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-  strategy="afterInteractive"
-/>
-<Script id="google-analytics" strategy="afterInteractive">
-  {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-  `}
-</Script>
-```
+## Step 7: Monitor and Maintain
 
-## Monitoring & Performance
+### Monitoring
+- Set up Sentry alerts for errors
+- Monitor Supabase dashboard for database issues
+- Check Vercel analytics for traffic patterns
 
-### Vercel Analytics
-Enable Vercel Analytics in project settings for:
-- Real User Monitoring (RUM)
-- Core Web Vitals
-- Traffic analytics
+### Regular Updates
+- Update dependencies monthly: `npm update`
+- Review security advisories: `npm audit`
+- Update privacy policy as needed
+- Review and respond to consultation requests
 
-### Performance Tips
+## Alternative Deployment Options
 
-1. **Images**: All Pexels images are already optimized via CDN
-2. **Caching**: Static pages are automatically cached by Vercel
-3. **Bundle Size**: Current first load JS is ~96KB (excellent)
-4. **Lighthouse Score Target**: 90+ for all metrics
+### Netlify
+1. Similar to Vercel setup
+2. Create `netlify.toml` for configuration
+3. Add environment variables in Netlify dashboard
+
+### AWS Amplify
+1. Connect GitHub repository
+2. Configure build settings for Vite
+3. Add environment variables
+
+### Self-Hosted (VPS/Docker)
+1. Build the project: `npm run build`
+2. Serve the `dist` folder with Nginx or Apache
+3. Configure SSL certificate (Let's Encrypt)
+4. Set up reverse proxy
+5. Configure security headers in web server
 
 ## Troubleshooting
 
-### Build Fails
-- Check for TypeScript errors: `npm run typecheck`
-- Verify all imports are correct
-- Check environment variables are set
+### Form Submissions Not Working
+- Check Supabase connection in browser console
+- Verify environment variables are set correctly
+- Check Supabase RLS policies are enabled
+- Verify API keys have correct permissions
 
-### Pages Not Loading
-- Verify deployment completed successfully
-- Check browser console for errors
-- Ensure DNS propagation is complete (for custom domain)
+### reCAPTCHA Not Loading
+- Verify site key is correct
+- Check domain is added to reCAPTCHA admin
+- Ensure CSP headers allow Google domains
 
-### API Calls Failing
-- Verify `NEXT_PUBLIC_BACKEND_URL` is set correctly
-- Check backend is deployed and accessible
-- Inspect network tab in browser DevTools
+### Rate Limiting Not Working
+- Verify Edge Function is deployed
+- Check Edge Function logs in Supabase
+- Test with different IPs or use VPN
 
-### Forms Not Submitting
-- Check API endpoints are deployed
-- Verify CORS settings on backend
-- Check browser console for errors
+### Styling Issues
+- Clear browser cache
+- Check Tailwind CSS is building correctly
+- Verify PostCSS configuration
 
-## Continuous Deployment
+## Security Checklist
 
-Vercel automatically deploys when you push to your repository:
-- **Main branch** → Production deployment
-- **Other branches** → Preview deployments
-
-To trigger a new deployment:
-```bash
-git add .
-git commit -m "Update content"
-git push origin main
-```
-
-## Rollback
-
-If you need to rollback to a previous version:
-1. Go to Vercel dashboard > Deployments
-2. Find the working deployment
-3. Click "..." menu > Promote to Production
+Before going live:
+- [ ] All environment variables are set in production
+- [ ] HTTPS is enforced
+- [ ] Security headers are configured
+- [ ] reCAPTCHA is working
+- [ ] Rate limiting is enabled
+- [ ] Privacy Policy is updated with correct information
+- [ ] Terms of Service is updated with correct information
+- [ ] Contact email addresses are updated
+- [ ] Cookie consent is functioning
+- [ ] GDPR compliance is verified
+- [ ] Error tracking is set up
+- [ ] Backups are configured for Supabase
 
 ## Support
 
-If you encounter issues:
-- Check [Vercel Documentation](https://vercel.com/docs)
-- Review build logs in Vercel dashboard
-- Contact Vercel support for deployment issues
+If you encounter issues during deployment:
+1. Check logs in Vercel/Netlify dashboard
+2. Check Supabase logs
+3. Check browser console for errors
+4. Review Sentry error reports
+5. Contact support: developer@immigrantsupportnetwork.com
+
+---
+
+**Last Updated:** December 14, 2024
+

@@ -1,239 +1,178 @@
-# Immigrant Support Network - Frontend
+# Supabase CLI
 
-A Next.js-powered web application providing comprehensive immigration guidance, visa information, AI-powered assistance, and travel deals for South Africans seeking opportunities abroad.
+[![Coverage Status](https://coveralls.io/repos/github/supabase/cli/badge.svg?branch=main)](https://coveralls.io/github/supabase/cli?branch=main) [![Bitbucket Pipelines](https://img.shields.io/bitbucket/pipelines/supabase-cli/setup-cli/master?style=flat-square&label=Bitbucket%20Canary)](https://bitbucket.org/supabase-cli/setup-cli/pipelines) [![Gitlab Pipeline Status](https://img.shields.io/gitlab/pipeline-status/sweatybridge%2Fsetup-cli?label=Gitlab%20Canary)
+](https://gitlab.com/sweatybridge/setup-cli/-/pipelines)
 
-## Features
+[Supabase](https://supabase.io) is an open source Firebase alternative. We're building the features of Firebase using enterprise-grade open source tools.
 
-- **Home Page**: Hero banner with CTAs, featured destinations, and latest blog posts
-- **Visa Guides**: Comprehensive visa information for 12+ countries
-- **Country-Specific Pages**: Detailed visa requirements, documents, and application process
-- **AI Assistant**: Interactive chat interface for immigration questions
-- **Travel Deals**: Flights, hotels, and relocation packages
-- **Blog**: Immigration tips, guides, and success stories
-- **Contact Form**: Direct communication channel with support team
+This repository contains all the functionality for Supabase CLI.
 
-## Tech Stack
+- [x] Running Supabase locally
+- [x] Managing database migrations
+- [x] Creating and deploying Supabase Functions
+- [x] Generating types directly from your database schema
+- [x] Making authenticated HTTP requests to [Management API](https://supabase.com/docs/reference/api/introduction)
 
-- **Framework**: Next.js 13.5.1 with App Router
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui
-- **Icons**: Lucide React
-- **Deployment**: Vercel (static export)
+## Getting started
 
-## Getting Started
+### Install the CLI
 
-### Prerequisites
-
-- Node.js 18+ installed
-- npm or yarn package manager
-
-### Installation
-
-1. Clone the repository
-2. Install dependencies:
+Available via [NPM](https://www.npmjs.com) as dev dependency. To install:
 
 ```bash
-npm install
+npm i supabase --save-dev
 ```
 
-3. Create `.env.local` file (use `.env.example` as template):
+When installing with yarn 4, you need to disable experimental fetch with the following nodejs config.
 
-```env
-NEXT_PUBLIC_BACKEND_URL=https://your-backend-url
-NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
+NODE_OPTIONS=--no-experimental-fetch yarn add supabase
 ```
 
-### Development
+> **Note**
+For Bun versions below v1.0.17, you must add `supabase` as a [trusted dependency](https://bun.sh/guides/install/trusted) before running `bun add -D supabase`.
 
-Run the development server:
+<details>
+  <summary><b>macOS</b></summary>
+
+  Available via [Homebrew](https://brew.sh). To install:
+
+  ```sh
+  brew install supabase/tap/supabase
+  ```
+
+  To install the beta release channel:
+  
+  ```sh
+  brew install supabase/tap/supabase-beta
+  brew link --overwrite supabase-beta
+  ```
+  
+  To upgrade:
+
+  ```sh
+  brew upgrade supabase
+  ```
+</details>
+
+<details>
+  <summary><b>Windows</b></summary>
+
+  Available via [Scoop](https://scoop.sh). To install:
+
+  ```powershell
+  scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
+  scoop install supabase
+  ```
+
+  To upgrade:
+
+  ```powershell
+  scoop update supabase
+  ```
+</details>
+
+<details>
+  <summary><b>Linux</b></summary>
+
+  Available via [Homebrew](https://brew.sh) and Linux packages.
+
+  #### via Homebrew
+
+  To install:
+
+  ```sh
+  brew install supabase/tap/supabase
+  ```
+
+  To upgrade:
+
+  ```sh
+  brew upgrade supabase
+  ```
+
+  #### via Linux packages
+
+  Linux packages are provided in [Releases](https://github.com/supabase/cli/releases). To install, download the `.apk`/`.deb`/`.rpm`/`.pkg.tar.zst` file depending on your package manager and run the respective commands.
+
+  ```sh
+  sudo apk add --allow-untrusted <...>.apk
+  ```
+
+  ```sh
+  sudo dpkg -i <...>.deb
+  ```
+
+  ```sh
+  sudo rpm -i <...>.rpm
+  ```
+
+  ```sh
+  sudo pacman -U <...>.pkg.tar.zst
+  ```
+</details>
+
+<details>
+  <summary><b>Other Platforms</b></summary>
+
+  You can also install the CLI via [go modules](https://go.dev/ref/mod#go-install) without the help of package managers.
+
+  ```sh
+  go install github.com/supabase/cli@latest
+  ```
+
+  Add a symlink to the binary in `$PATH` for easier access:
+
+  ```sh
+  ln -s "$(go env GOPATH)/bin/cli" /usr/bin/supabase
+  ```
+
+  This works on other non-standard Linux distros.
+</details>
+
+<details>
+  <summary><b>Community Maintained Packages</b></summary>
+
+  Available via [pkgx](https://pkgx.sh/). Package script [here](https://github.com/pkgxdev/pantry/blob/main/projects/supabase.com/cli/package.yml).
+  To install in your working directory:
+
+  ```bash
+  pkgx install supabase
+  ```
+
+  Available via [Nixpkgs](https://nixos.org/). Package script [here](https://github.com/NixOS/nixpkgs/blob/master/pkgs/development/tools/supabase-cli/default.nix).
+</details>
+
+### Run the CLI
 
 ```bash
-npm run dev
+supabase bootstrap
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Build
-
-Create a production build:
+Or using npx:
 
 ```bash
-npm run build
+npx supabase bootstrap
 ```
 
-### Type Checking
+The bootstrap command will guide you through the process of setting up a Supabase project using one of the [starter](https://github.com/supabase-community/supabase-samples/blob/main/samples.json) templates.
 
-Run TypeScript type checking:
+## Docs
 
-```bash
-npm run typecheck
+Command & config reference can be found [here](https://supabase.com/docs/reference/cli/about).
+
+## Breaking changes
+
+We follow semantic versioning for changes that directly impact CLI commands, flags, and configurations.
+
+However, due to dependencies on other service images, we cannot guarantee that schema migrations, seed.sql, and generated types will always work for the same CLI major version. If you need such guarantees, we encourage you to pin a specific version of CLI in package.json.
+
+## Developing
+
+To run from source:
+
+```sh
+# Go >= 1.22
+go run . help
 ```
-
-## Project Structure
-
-```
-├── app/
-│   ├── api/
-│   │   ├── ai/           # AI assistant endpoint
-│   │   └── contact/      # Contact form endpoint
-│   ├── visas/            # Visa guides pages
-│   ├── travel/           # Travel deals page
-│   ├── ai-assistant/     # AI assistant page
-│   ├── blog/             # Blog listing page
-│   ├── contact/          # Contact page
-│   └── page.tsx          # Home page
-├── components/
-│   ├── ui/               # shadcn/ui components
-│   ├── HeroBanner.tsx
-│   ├── Footer.tsx
-│   ├── CountryCard.tsx
-│   ├── TravelCard.tsx
-│   ├── BlogCard.tsx
-│   └── AIChatBubble.tsx
-└── lib/
-    └── utils.ts          # Utility functions
-```
-
-## Pages Overview
-
-### Home (`/`)
-Landing page with hero section, features, popular destinations, and latest blog posts.
-
-### Visas (`/visas`)
-Complete list of countries with visa guides. Includes search functionality.
-
-### Country Visa Guide (`/visas/[country]`)
-Detailed visa information including:
-- Processing times and fees
-- Visa categories
-- Required documents
-- Application process
-- Tips and guidance
-
-### Travel Deals (`/travel`)
-Tabbed interface showing:
-- Flight deals
-- Hotel accommodations
-- Relocation packages
-
-### AI Assistant (`/ai-assistant`)
-Interactive chat interface for immigration questions with demo API integration.
-
-### Blog (`/blog`)
-Immigration news, tips, and guides with category filtering.
-
-### Contact (`/contact`)
-Contact form with validation and API integration.
-
-## API Endpoints
-
-### `/api/ai` (POST)
-Handles AI assistant questions. Currently returns demo responses.
-
-**Request:**
-```json
-{
-  "question": "What documents do I need for a UK visa?"
-}
-```
-
-**Response:**
-```json
-{
-  "response": "AI-generated response text"
-}
-```
-
-### `/api/contact` (POST)
-Handles contact form submissions.
-
-**Request:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "subject": "Visa inquiry",
-  "message": "I need help with..."
-}
-```
-
-## Deployment
-
-### Vercel Deployment
-
-1. Push code to GitHub repository
-2. Import project in Vercel dashboard
-3. Configure environment variables
-4. Deploy
-
-### Environment Variables for Production
-
-Set these in Vercel dashboard:
-- `NEXT_PUBLIC_BACKEND_URL`
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-
-### Custom Domain
-
-Connect domain `immigrantsupportnetwork.co.za` in Vercel settings.
-
-## SEO Optimization
-
-- Page-level metadata for all routes
-- Open Graph tags for social sharing
-- Semantic HTML structure
-- Responsive meta viewport
-- Descriptive page titles and descriptions
-
-## Analytics Integration
-
-To add Google Analytics:
-
-1. Get Google Analytics ID (G-XXXXXXXXXX)
-2. Add script to `app/layout.tsx`:
-
-```typescript
-<Script
-  src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-  strategy="afterInteractive"
-/>
-<Script id="google-analytics" strategy="afterInteractive">
-  {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '${GA_ID}');
-  `}
-</Script>
-```
-
-## Design Principles
-
-- Mobile-first responsive design
-- Clean, professional aesthetic using blue color scheme
-- Consistent spacing using 8px grid system
-- High contrast for readability
-- Intuitive navigation with clear CTAs
-- Fast loading with optimized images (Pexels stock photos)
-
-## Future Enhancements
-
-- [ ] Connect to real backend API
-- [ ] Implement user authentication
-- [ ] Add blog CMS integration
-- [ ] Enable real-time chat support
-- [ ] Add multilingual support
-- [ ] Implement advanced search and filtering
-- [ ] Add user testimonials section
-- [ ] Create member dashboard
-
-## Support
-
-For questions or issues:
-- Email: info@immigrantsupportnetwork.co.za
-- Website: https://immigrantsupportnetwork.co.za
-
-## License
-
-Copyright © 2025 Immigrant Support Network. All rights reserved.
+# Trigger deployment
