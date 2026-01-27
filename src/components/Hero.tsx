@@ -33,11 +33,10 @@ export default function Hero() {
           </div>
 
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-md text-white drop-shadow-lg">
-            Your Trusted Partner for Immigration & Travel Support
+            Avoid Costly Visa Mistakes—Get Expert Assessment First
           </h1>
           <p className="text-lg md:text-xl leading-relaxed mb-lg text-white/95 drop-shadow">
-            Expert guidance for Africans seeking to travel, study, work, or relocate overseas.
-            Professional, ethical, and transparent immigration assistance every step of the way.
+            Professional visa assessment and second opinion service to help South Africans apply correctly the first time
           </p>
 
           <div className="flex flex-col sm:flex-row gap-sm justify-center mb-md">
@@ -45,13 +44,13 @@ export default function Hero() {
               onClick={handleBookingClick}
               className="btn btn-large bg-white text-primary hover:bg-gray-100 px-8 py-4 font-bold shadow-xl"
             >
-              Book Free Consultation
+              Get Visa Assessment (Paid)
             </button>
             <button
               onClick={handleServicesClick}
               className="btn btn-large bg-transparent text-white border-2 border-white hover:bg-white hover:text-primary px-8 py-4 font-bold"
             >
-              Explore Services
+              Not ready yet? Book a free consultation
             </button>
           </div>
 

@@ -16,6 +16,11 @@ export default function WhatsAppButton() {
     <>
       {/* Floating WhatsApp Button */}
       <div className="fixed bottom-6 right-6 z-50">
+        <div className="flex flex-col items-end gap-2 mb-2">
+          <p className="text-xs text-text-dark bg-white px-3 py-1 rounded-md shadow-sm max-w-[200px] text-right">
+            For serious applicants who want professional guidance
+          </p>
+        </div>
         <button
           onClick={handleClick}
           onMouseEnter={() => setIsHovered(true)}

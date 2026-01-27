@@ -5,12 +5,14 @@ import { validateConfig } from './lib/config'
 import { isAIChatEnabled, logFeatureFlagsStatus } from './lib/featureFlags'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import PaidServiceBlock from './components/PaidServiceBlock'
 import TrustBanner from './components/TrustBanner'
 import Services from './components/Services'
 import HowItWorks from './components/HowItWorks'
 import Testimonials from './components/Testimonials'
 import WhyChooseUs from './components/WhyChooseUs'
 import ToolsPartnership from './components/ToolsPartnership'
+import WhoThisIsFor from './components/WhoThisIsFor'
 import BookingForm from './components/BookingForm'
 import Footer from './components/Footer'
 import CookieConsent from './components/CookieConsent'
@@ -37,15 +39,17 @@ function App() {
         <Header />
         <main>
           <Hero />
+          <PaidServiceBlock />
           <TrustBanner />
+          <WhyChooseUs />
           <Services />
           <div id="how-it-works">
             <HowItWorks />
           </div>
           <Testimonials />
-          <WhyChooseUs />
-          {/* Partnership with Immigration AI */}
+          {/* Partnership with Immigration AI - Repositioned with disclaimer */}
           <ToolsPartnership />
+          <WhoThisIsFor />
           <BookingForm />
         </main>
         <Footer />

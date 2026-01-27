@@ -5,6 +5,8 @@ const services = [
       'Complete assistance with visa applications for tourism, business, study, and work visas. We help you understand requirements, prepare documentation, and submit strong applications.',
     icon: '📋',
     image: 'https://images.unsplash.com/photo-1569098644584-210bcd375b59?w=800&h=600&fit=crop',
+    badge: '⭐ MOST POPULAR',
+    badgeColor: 'bg-yellow-500',
   },
   {
     title: 'Immigration Documentation',
@@ -26,6 +28,8 @@ const services = [
       'Strategic guidance when applications are refused. We analyze refusal reasons, advise on reapplication strategies, and coordinate with immigration lawyers for appeals.',
     icon: '⚖️',
     image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=600&fit=crop',
+    badge: '⚠️ COMPLEX CASES',
+    badgeColor: 'bg-red-500',
   },
   {
     title: 'Study Abroad Guidance',
@@ -33,6 +37,8 @@ const services = [
       'End-to-end support for students including university selection, application assistance, student visa processing, and pre-departure preparation.',
     icon: '🎓',
     image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&h=600&fit=crop',
+    badge: '🎓 STUDENTS',
+    badgeColor: 'bg-green-500',
   },
   {
     title: 'Work & Skilled Migration',
@@ -69,6 +75,11 @@ export default function Services() {
 
               {/* Content */}
               <div className="relative z-10 p-lg">
+                {service.badge && (
+                  <div className={`${service.badgeColor} text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-sm`}>
+                    {service.badge}
+                  </div>
+                )}
                 <div className="text-5xl mb-sm">{service.icon}</div>
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-sm drop-shadow-lg">
                   {service.title}

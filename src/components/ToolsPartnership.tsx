@@ -15,6 +15,10 @@ export default function ToolsPartnership() {
         <div className="max-w-6xl mx-auto">
           {/* Partnership Header with Logo */}
           <div className="text-center mb-xl">
+            {/* Disclaimer */}
+            <p className="text-sm text-blue-200 italic mb-md max-w-2xl mx-auto">
+              AI tools are best used alongside professional expert review for stronger applications.
+            </p>
             {/* Powered By Badge */}
             <div className="inline-flex items-center gap-2 px-5 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white text-sm font-semibold mb-md">
               <span className="text-yellow-400">⚡</span>
