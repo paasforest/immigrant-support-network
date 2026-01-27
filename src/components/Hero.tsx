@@ -1,5 +1,3 @@
-import { scrollToElement } from '../lib/utils'
-
 export default function Hero() {
   const handleBookingClick = () => {
     const whatsappNumber = '27679518124'
