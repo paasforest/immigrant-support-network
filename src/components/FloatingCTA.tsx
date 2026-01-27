@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { scrollToElement } from '../lib/utils'
 
 export default function FloatingCTA() {
   const [isVisible, setIsVisible] = useState(false)
@@ -15,7 +14,10 @@ export default function FloatingCTA() {
   }, [])
 
   const handleClick = () => {
-    scrollToElement('booking')
+    const whatsappNumber = '27679518124'
+    const message = 'Hi! I would like to book a consultation. Please let me know your availability.'
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+    window.open(url, '_blank')
   }
 
   if (!isVisible) return null

@@ -17,7 +17,7 @@ import ComparisonTable from './components/ComparisonTable'
 import FAQ from './components/FAQ'
 import WhyNow from './components/WhyNow'
 import WhoThisIsFor from './components/WhoThisIsFor'
-import BookingForm from './components/BookingForm'
+import WhatsAppBooking from './components/WhatsAppBooking'
 import Footer from './components/Footer'
 import CookieConsent from './components/CookieConsent'
 import WhatsAppButton from './components/WhatsAppButton'
@@ -59,7 +59,7 @@ function App() {
           <FAQ />
           <WhyNow />
           <WhoThisIsFor />
-          <BookingForm />
+          <WhatsAppBooking />
         </main>
         <Footer />
         <CookieConsent />

@@ -76,8 +76,10 @@ export default function WhyNow() {
             <div className="flex flex-col sm:flex-row gap-sm justify-center items-center">
               <button
                 onClick={() => {
-                  const bookingSection = document.getElementById('booking')
-                  bookingSection?.scrollIntoView({ behavior: 'smooth' })
+                  const whatsappNumber = '27679518124'
+                  const message = 'Hi! I would like to secure a spot for Visa Assessment (R499). Please let me know how to proceed.'
+                  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+                  window.open(url, '_blank')
                 }}
                 className="btn bg-white text-red-700 hover:bg-red-50 btn-large px-10 py-4 text-lg font-bold shadow-xl"
               >

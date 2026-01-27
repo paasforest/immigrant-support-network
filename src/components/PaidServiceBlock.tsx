@@ -1,9 +1,11 @@
-import { scrollToElement } from '../lib/utils'
 import ProgressBar from './ProgressBar'
 
 export default function PaidServiceBlock() {
   const handleAssessmentClick = () => {
-    scrollToElement('booking')
+    const whatsappNumber = '27679518124'
+    const message = 'Hi! I would like to book a Visa Assessment & Second Opinion (R499). Please let me know how to proceed.'
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+    window.open(url, '_blank')
   }
 
   return (

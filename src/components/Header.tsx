@@ -14,7 +14,15 @@ export default function Header() {
   }, [])
 
   const handleNavClick = (id: string) => {
-    scrollToElement(id)
+    if (id === 'booking') {
+      // Open WhatsApp for booking
+      const whatsappNumber = '27679518124'
+      const message = 'Hi! I would like to book a consultation. Please let me know your availability.'
+      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+      window.open(url, '_blank')
+    } else {
+      scrollToElement(id)
+    }
     setIsMobileMenuOpen(false)
   }
 

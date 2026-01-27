@@ -88,15 +88,17 @@ export default function AssessmentTestimonials() {
           <p className="text-lg font-semibold text-text-dark mb-md">
             Join 2,847+ clients who avoided costly visa mistakes
           </p>
-          <button
-            onClick={() => {
-              const bookingSection = document.getElementById('booking')
-              bookingSection?.scrollIntoView({ behavior: 'smooth' })
-            }}
-            className="btn btn-primary btn-large px-10 py-4 text-lg font-bold"
-          >
-            Get Your Assessment - R499
-          </button>
+            <button
+              onClick={() => {
+                const whatsappNumber = '27679518124'
+                const message = 'Hi! I would like to book a Visa Assessment & Second Opinion (R499). Please let me know how to proceed.'
+                const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+                window.open(url, '_blank')
+              }}
+              className="btn btn-primary btn-large px-10 py-4 text-lg font-bold"
+            >
+              Get Your Assessment - R499
+            </button>
         </div>
       </div>
     </section>

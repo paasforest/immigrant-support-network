@@ -269,8 +269,10 @@ export default function ToolsPartnership() {
             </p>
             <button
               onClick={() => {
-                const bookingSection = document.getElementById('booking')
-                bookingSection?.scrollIntoView({ behavior: 'smooth' })
+                const whatsappNumber = '27679518124'
+                const message = 'Hi! I would like to book a free consultation. Please let me know your availability.'
+                const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+                window.open(url, '_blank')
               }}
               className="btn btn-primary"
             >

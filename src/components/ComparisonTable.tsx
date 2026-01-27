@@ -147,8 +147,10 @@ export default function ComparisonTable() {
             </p>
             <button
               onClick={() => {
-                const bookingSection = document.getElementById('booking')
-                bookingSection?.scrollIntoView({ behavior: 'smooth' })
+                const whatsappNumber = '27679518124'
+                const message = 'Hi! I would like to book a Visa Assessment & Second Opinion (R499). Please let me know how to proceed.'
+                const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+                window.open(url, '_blank')
               }}
               className="btn btn-primary btn-large px-12 py-5 text-xl font-bold shadow-xl"
             >

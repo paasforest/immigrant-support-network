@@ -2,11 +2,15 @@ import { scrollToElement } from '../lib/utils'
 
 export default function Hero() {
   const handleBookingClick = () => {
-    scrollToElement('booking')
+    const whatsappNumber = '27679518124'
+    const message = 'Hi! I would like to book a consultation for immigration support. Please let me know your availability.'
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+    window.open(url, '_blank')
   }
 
   const handleServicesClick = () => {
-    scrollToElement('services')
+    const servicesSection = document.getElementById('services')
+    servicesSection?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
