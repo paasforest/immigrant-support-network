@@ -55,7 +55,10 @@ export default function Services() {
       <div className="container">
         <div className="section-header">
           <h2>Our Services</h2>
-          <p>Comprehensive immigration support tailored to your needs</p>
+          <p>
+            Cape Town-based visa consulting service supporting clients across South Africa virtually, with popular destinations
+            including the UK, Schengen countries, Canada, USA and Australia.
+          </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
           {services.map((service, index) => (

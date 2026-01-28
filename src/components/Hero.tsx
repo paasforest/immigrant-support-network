@@ -46,7 +46,7 @@ export default function Hero() {
             Avoid Costly Visa Mistakes—Get Expert Assessment First
           </h1>
           <p className="text-lg md:text-xl leading-relaxed mb-lg text-white/95 drop-shadow">
-            Professional visa assessment and second opinion service to help South Africans apply correctly the first time
+            Cape Town-based visa consultants serving South Africa nationwide (virtually via WhatsApp). Get a Visa Assessment & Second Opinion, plus support for UK, Schengen, Canada, USA, Australia, study and work visas.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-sm justify-center mb-md">

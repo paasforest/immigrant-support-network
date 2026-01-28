@@ -2,6 +2,11 @@ import { useState } from 'react'
 
 const faqs = [
   {
+    question: 'Do you help clients outside Cape Town?',
+    answer:
+      'Yes. We are Cape Town-based, but we work with clients across South Africa virtually via WhatsApp and online consultations. You can complete the visa assessment and share documents remotely, wherever you are in South Africa.',
+  },
+  {
     question: 'Is R499 really worth it?',
     answer: 'Absolutely! A refused visa application costs R1,500-R8,000 in lost fees, plus 3-6 months of wasted time. Our assessment helps you avoid these mistakes for just R499 - that\'s a 90% savings. Most clients say it\'s the best investment they made.',
   },
