@@ -77,7 +77,7 @@ export default function Footer() {
               <ul className="list-none space-y-2">
                 <li>
                   <a
-                    href="#services"
+                    href="/services"
                     className="text-gray-300 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
                   >
                     <span className="text-primary">→</span>
@@ -86,7 +86,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#services"
+                    href="/services"
                     className="text-gray-300 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
                   >
                     <span className="text-primary">→</span>
@@ -95,7 +95,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#services"
+                    href="/services"
                     className="text-gray-300 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
                   >
                     <span className="text-primary">→</span>
@@ -104,7 +104,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#services"
+                    href="/services"
                     className="text-gray-300 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
                   >
                     <span className="text-primary">→</span>
@@ -113,7 +113,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#services"
+                    href="/services"
                     className="text-gray-300 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
                   >
                     <span className="text-primary">→</span>
@@ -206,7 +206,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#booking"
+                    href="/contact"
                     className="text-gray-300 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
                   >
                     <span className="text-primary">→</span>

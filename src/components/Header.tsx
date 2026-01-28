@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
-import { cn, scrollToElement } from '../lib/utils'
+import { useNavigate } from 'react-router-dom'
+import { cn } from '../lib/utils'
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,16 +15,15 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (id: string) => {
-    if (id === 'booking') {
-      // Open WhatsApp for booking
-      const whatsappNumber = '27679518124'
-      const message = 'Hi! I would like to book a consultation. Please let me know your availability.'
-      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
-      window.open(url, '_blank')
-    } else {
-      scrollToElement(id)
-    }
+  const openWhatsAppBooking = () => {
+    const whatsappNumber = '27679518124'
+    const message = 'Hi! I would like to book a consultation. Please let me know your availability.'
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+    window.open(url, '_blank')
+  }
+
+  const goTo = (path: string) => {
+    navigate(path)
     setIsMobileMenuOpen(false)
   }
 
@@ -36,11 +37,15 @@ export default function Header() {
       <div className="container">
         <div className="flex items-center justify-between py-sm">
           {/* Logo */}
-          <div className="flex items-center gap-3 font-bold text-lg text-text-dark">
+          <button
+            onClick={() => goTo('/')}
+            className="flex items-center gap-3 font-bold text-lg text-text-dark bg-transparent border-none cursor-pointer"
+            aria-label="Go to homepage"
+          >
             <span className="text-2xl">🌍</span>
             <span className="hidden sm:inline">Immigrant Support Network</span>
             <span className="sm:hidden">ISN</span>
-          </div>
+          </button>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -67,10 +72,16 @@ export default function Header() {
             )}
           >
             <button
-              onClick={() => handleNavClick('services')}
+              onClick={() => goTo('/services')}
               className="w-full md:w-auto text-left md:text-center bg-transparent border-none text-text-medium text-base cursor-pointer transition-colors duration-200 font-medium hover:text-primary py-2 md:py-0"
             >
               Services
+            </button>
+            <button
+              onClick={() => goTo('/about')}
+              className="w-full md:w-auto text-left md:text-center bg-transparent border-none text-text-medium text-base cursor-pointer transition-colors duration-200 font-medium hover:text-primary py-2 md:py-0"
+            >
+              About
             </button>
             <a
               href="https://www.immigrationai.co.za"
@@ -81,19 +92,19 @@ export default function Header() {
               <span>🤖 AI Tools</span>
             </a>
             <button
-              onClick={() => handleNavClick('how-it-works')}
+              onClick={() => goTo('/services#how-it-works')}
               className="w-full md:w-auto text-left md:text-center bg-transparent border-none text-text-medium text-base cursor-pointer transition-colors duration-200 font-medium hover:text-primary py-2 md:py-0"
             >
               How It Works
             </button>
             <button
-              onClick={() => handleNavClick('booking')}
+              onClick={() => goTo('/contact')}
               className="w-full md:w-auto text-left md:text-center bg-transparent border-none text-text-medium text-base cursor-pointer transition-colors duration-200 font-medium hover:text-primary py-2 md:py-0"
             >
               Contact
             </button>
             <button
-              onClick={() => handleNavClick('booking')}
+              onClick={openWhatsAppBooking}
               className="btn btn-primary btn-small w-full md:w-auto mt-2 md:mt-0"
             >
               Book Consultation

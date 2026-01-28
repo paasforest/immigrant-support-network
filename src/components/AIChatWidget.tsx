@@ -75,7 +75,7 @@ export default function AIChatWidget() {
         {
           role: 'assistant',
           content:
-            "I apologize, I'm having trouble connecting right now. Please try:\n\n📱 WhatsApp: +27 67 951 8124\n📧 Email: info@immigrantsupportnetwork.co.za\n\nOr use the booking form below to schedule a FREE consultation!",
+            "I apologize, I'm having trouble connecting right now. Please try:\n\n📱 WhatsApp: +27 67 951 8124\n📧 Email: info@immigrantsupportnetwork.co.za\n\nOr visit our Contact page to book via WhatsApp.",
           timestamp: Date.now(),
         },
       ])
@@ -241,7 +241,7 @@ export default function AIChatWidget() {
                 📱 WhatsApp Us
               </a>
               <span className="text-gray-300">|</span>
-              <a href="#booking" className="text-blue-600 hover:text-blue-700 font-medium">
+              <a href="/contact" className="text-blue-600 hover:text-blue-700 font-medium">
                 📅 Book Consultation
               </a>
             </div>
