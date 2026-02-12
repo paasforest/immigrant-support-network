@@ -5,6 +5,7 @@ import { initSentry } from './lib/sentry'
 import { validateConfig } from './lib/config'
 import { isAIChatEnabled, logFeatureFlagsStatus } from './lib/featureFlags'
 import Header from './components/Header'
+import SeoHead from './components/SeoHead'
 import Footer from './components/Footer'
 import CookieConsent from './components/CookieConsent'
 import WhatsAppButton from './components/WhatsAppButton'
@@ -51,6 +52,7 @@ function App() {
   return (
     <RecaptchaProvider>
       <div className="app">
+        <SeoHead />
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />

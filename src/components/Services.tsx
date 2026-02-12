@@ -57,7 +57,12 @@ export default function Services() {
           <h2>Our Services</h2>
           <p>
             Cape Town-based visa consulting service supporting clients across South Africa virtually, with popular destinations
-            including the UK, Schengen countries, Canada, USA and Australia.
+            including the{' '}
+            <a href="/services" className="text-primary font-semibold hover:underline">UK</a>,{' '}
+            <a href="/services" className="text-primary font-semibold hover:underline">Schengen</a>,{' '}
+            <a href="/services" className="text-primary font-semibold hover:underline">Canada</a>, USA and Australia. Need{' '}
+            <a href="/contact" className="text-primary font-semibold hover:underline">visa assessment South Africa</a>?{' '}
+            <a href="/contact" className="text-primary font-semibold hover:underline">Book via WhatsApp</a>.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
