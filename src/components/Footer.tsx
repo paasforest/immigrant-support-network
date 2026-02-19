@@ -138,6 +138,15 @@ export default function Footer() {
                     Blog & Resources
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="/visa-updates"
+                    className="text-gray-300 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
+                  >
+                    <span className="text-primary">→</span>
+                    Visa updates
+                  </a>
+                </li>
                 <li className="pt-2 mt-2 border-t border-gray-700">
                   <a
                     href="https://www.immigrationai.co.za"

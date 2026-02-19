@@ -36,8 +36,11 @@ export default function BlogPage() {
       <section className="py-xl">
         <div className="container">
           <h1 className="text-3xl md:text-4xl font-bold text-text-dark mb-sm">Blog & Resources</h1>
-          <p className="text-text-medium leading-relaxed mb-xl max-w-2xl">
+          <p className="text-text-medium leading-relaxed mb-md max-w-2xl">
             Guides and insights on overseas employment, work visas, and applying safely for jobs abroad.
+          </p>
+          <p className="text-text-medium mb-xl">
+            <a href="/visa-updates" className="text-primary font-semibold hover:underline">Visa & immigration updates</a> – latest changes by country (UK, Schengen, Canada, Australia, Germany).
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
             {posts.map((post) => (

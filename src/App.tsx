@@ -20,6 +20,7 @@ import TermsPage from './pages/TermsPage'
 import OverseasEmploymentPage from './pages/OverseasEmploymentPage'
 import BlogPage from './pages/BlogPage'
 import BlogPostPage from './pages/BlogPostPage'
+import VisaUpdatesPage from './pages/VisaUpdatesPage'
 
 function App() {
   const location = useLocation()
@@ -67,6 +68,7 @@ function App() {
           <Route path="/overseas-employment-support" element={<OverseasEmploymentPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/visa-updates" element={<VisaUpdatesPage />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
         <Footer />

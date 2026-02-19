@@ -54,6 +54,15 @@ export const SEO_BY_PATH: Record<string, PageSeo> = {
     description: 'Terms of service for using Immigrant Support Network visa and immigration consultancy services.',
     canonical: `${BASE}/terms`,
   },
+  '/visa-updates': {
+    title: 'Visa & Immigration Updates | UK, Schengen, Canada, Australia | Immigrant Support Network',
+    description:
+      'Latest visa and immigration changes: UK Skilled Worker, Schengen ETIAS, Canada Express Entry, Australia, Germany. Manual updates for applicants from South Africa. Always confirm with official sources.',
+    canonical: `${BASE}/visa-updates`,
+    ogTitle: 'Visa & Immigration Updates | Immigrant Support Network',
+    ogDescription:
+      'Visa rule changes and updates for UK, Schengen, Canada, Australia, Germany. For applicants from South Africa.',
+  },
   '/blog': {
     title: 'Blog & Resources | Overseas Jobs & Work Visa Guidance | Immigrant Support Network',
     description:
