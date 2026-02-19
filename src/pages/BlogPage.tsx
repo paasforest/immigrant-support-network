@@ -7,6 +7,8 @@ const posts = [
     excerpt:
       'Which countries are actively recruiting African talent? Learn where demand is highest for care workers, drivers, skilled trades, and IT professionals.',
     date: '2026-02-12',
+    image: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&h=300&fit=crop',
+    imageAlt: 'World map and global employment opportunities',
   },
   {
     slug: 'step-by-step-work-permits',
@@ -14,6 +16,8 @@ const posts = [
     excerpt:
       'A clear roadmap from application to approval. Understand documents, timelines, and what licensed recruiters and employers expect.',
     date: '2026-02-10',
+    image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=300&fit=crop',
+    imageAlt: 'Documents and work permit application guidance',
   },
   {
     slug: 'how-to-apply-safely',
@@ -21,6 +25,8 @@ const posts = [
     excerpt:
       'Avoid scams and fake job offers. Learn how to verify employers, protect your documents, and work with legitimate recruitment partners.',
     date: '2026-02-08',
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=300&fit=crop',
+    imageAlt: 'Safe and secure job application process',
   },
 ]
 
@@ -40,7 +46,12 @@ export default function BlogPage() {
                 to={`/blog/${post.slug}`}
                 className="block bg-white border border-border rounded-xl overflow-hidden hover:shadow-lg hover:border-primary transition-all"
               >
-                <div className="h-48 bg-gradient-to-br from-primary/20 to-primary/5" />
+                <img
+                  src={post.image}
+                  alt={post.imageAlt}
+                  className="w-full h-48 object-cover"
+                  loading="lazy"
+                />
                 <div className="p-lg">
                   <time className="text-sm text-text-light">{post.date}</time>
                   <h2 className="text-xl font-bold text-text-dark mt-xs mb-sm">{post.title}</h2>

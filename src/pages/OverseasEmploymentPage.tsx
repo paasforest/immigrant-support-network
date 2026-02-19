@@ -160,8 +160,8 @@ export default function OverseasEmploymentPage() {
             </div>
             <div className="border border-border rounded-xl overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1569025743873-ea3a9ce55753?w=600&h=300&fit=crop"
-                alt="Germany professional work scene"
+                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=300&fit=crop"
+                alt="Germany professional work scene – office and skilled workers"
                 className="w-full h-40 object-cover"
               />
               <div className="p-lg">
