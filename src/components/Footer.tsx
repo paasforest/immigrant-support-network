@@ -120,6 +120,24 @@ export default function Footer() {
                     Study Abroad Guidance
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="/overseas-employment-support"
+                    className="text-gray-300 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
+                  >
+                    <span className="text-primary">→</span>
+                    Overseas Employment Support
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/blog"
+                    className="text-gray-300 text-sm hover:text-white transition-colors duration-200 flex items-center gap-2"
+                  >
+                    <span className="text-primary">→</span>
+                    Blog & Resources
+                  </a>
+                </li>
                 <li className="pt-2 mt-2 border-t border-gray-700">
                   <a
                     href="https://www.immigrationai.co.za"

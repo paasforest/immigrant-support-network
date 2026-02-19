@@ -64,7 +64,8 @@ export default function AboutPage() {
                 We focus on accuracy, compliance, and clarity to increase the chances of visa approval while reducing delays and errors. Our team has supported thousands of applicants with document preparation, embassy requirements, and application strategy. Success rates and outcomes depend on each case and government decisions; we do not guarantee approvals.
               </p>
               <p className="text-text-medium leading-relaxed">
-                Whether you need Schengen visa assistance South Africa, Canada visa consultant services, or study and work visa support, we provide expert guidance every step of the way. Book a consultation via WhatsApp for a fast response.
+                Whether you need Schengen visa assistance South Africa, Canada visa consultant services, study and work visa support, or{' '}
+                <a href="/overseas-employment-support" className="text-primary font-semibold hover:underline">overseas employment support</a>, we provide expert guidance every step of the way. Book a consultation via WhatsApp for a fast response.
               </p>
             </div>
           </div>

@@ -78,6 +78,18 @@ export default function Header() {
               Services
             </button>
             <button
+              onClick={() => goTo('/overseas-employment-support')}
+              className="w-full md:w-auto text-left md:text-center bg-transparent border-none text-text-medium text-base cursor-pointer transition-colors duration-200 font-medium hover:text-primary py-2 md:py-0"
+            >
+              Overseas Jobs
+            </button>
+            <button
+              onClick={() => goTo('/blog')}
+              className="w-full md:w-auto text-left md:text-center bg-transparent border-none text-text-medium text-base cursor-pointer transition-colors duration-200 font-medium hover:text-primary py-2 md:py-0"
+            >
+              Blog
+            </button>
+            <button
               onClick={() => goTo('/about')}
               className="w-full md:w-auto text-left md:text-center bg-transparent border-none text-text-medium text-base cursor-pointer transition-colors duration-200 font-medium hover:text-primary py-2 md:py-0"
             >

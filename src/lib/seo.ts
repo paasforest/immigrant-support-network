@@ -54,6 +54,42 @@ export const SEO_BY_PATH: Record<string, PageSeo> = {
     description: 'Terms of service for using Immigrant Support Network visa and immigration consultancy services.',
     canonical: `${BASE}/terms`,
   },
+  '/blog': {
+    title: 'Blog & Resources | Overseas Jobs & Work Visa Guidance | Immigrant Support Network',
+    description:
+      'Guides on overseas jobs for Africans, work visas, legal work permits, and how to apply safely to jobs abroad. Expert tips from Immigrant Support Network.',
+    canonical: `${BASE}/blog`,
+    ogTitle: 'Blog & Resources | Immigrant Support Network',
+    ogDescription:
+      'Guides on overseas jobs, work visas, and applying safely. Expert tips from Immigrant Support Network.',
+  },
+  '/blog/top-countries-hiring-2026': {
+    title: 'Top 5 Countries Hiring Skilled African Workers in 2026 | Immigrant Support Network',
+    description:
+      'Which countries are actively recruiting African talent? UK, Canada, Germany, Australia, New Zealand. Learn where demand is highest for overseas jobs.',
+    canonical: `${BASE}/blog/top-countries-hiring-2026`,
+  },
+  '/blog/step-by-step-work-permits': {
+    title: 'Step-by-Step Guide to Legal Work Permits Abroad | Immigrant Support Network',
+    description:
+      'A clear roadmap from application to approval. Understand documents, timelines, and what licensed recruiters expect for work visa applications.',
+    canonical: `${BASE}/blog/step-by-step-work-permits`,
+  },
+  '/blog/how-to-apply-safely': {
+    title: 'How Africans Can Apply Safely to Jobs Overseas | Immigrant Support Network',
+    description:
+      'Avoid scams and fake job offers. Learn how to verify employers, protect your documents, and work with legitimate recruitment partners.',
+    canonical: `${BASE}/blog/how-to-apply-safely`,
+  },
+  '/overseas-employment-support': {
+    title: 'Overseas Job Assistance & Work Visa Support | Immigrant Support Network',
+    description:
+      'Get expert support applying for verified overseas jobs and work visas. Partnering with licensed recruiters, we help Africans secure real opportunities abroad.',
+    canonical: `${BASE}/overseas-employment-support`,
+    ogTitle: 'Overseas Job Assistance & Work Visa Support | Immigrant Support Network',
+    ogDescription:
+      'Get expert support applying for verified overseas jobs and work visas. We help Africans connect with licensed recruiters and apply legally for work opportunities abroad.',
+  },
 }
 
 export function getSeoForPath(pathname: string): PageSeo | null {

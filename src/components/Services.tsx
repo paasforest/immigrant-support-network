@@ -46,6 +46,8 @@ const services = [
       'Assistance with work permits, skilled migration programs, employer sponsorships, and professional qualification assessments for various countries.',
     icon: '💼',
     image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=600&fit=crop',
+    link: '/overseas-employment-support',
+    linkLabel: 'Overseas Employment Support →',
   },
 ]
 
@@ -95,6 +97,14 @@ export default function Services() {
                 <p className="text-[0.95rem] leading-relaxed text-white/95 drop-shadow">
                   {service.description}
                 </p>
+                {service.link && (
+                  <a
+                    href={service.link}
+                    className="inline-block mt-sm text-white font-semibold hover:underline text-sm"
+                  >
+                    {service.linkLabel}
+                  </a>
+                )}
               </div>
             </div>
           ))}

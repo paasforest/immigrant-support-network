@@ -12,7 +12,8 @@ export default function ContactPage() {
               WhatsApp.
             </p>
             <p className="text-text-medium leading-relaxed text-sm">
-              For visa assessment South Africa, UK visa help, Schengen visa assistance, or any of our{' '}
+              For visa assessment South Africa, UK visa help, Schengen visa assistance,{' '}
+              <a href="/overseas-employment-support" className="text-primary font-semibold hover:underline">overseas job support</a>, or any of our{' '}
               <a href="/services" className="text-primary font-semibold hover:underline">visa and immigration services</a>, 
               message us below. You can also learn more <a href="/about" className="text-primary font-semibold hover:underline">about us</a>.
             </p>
