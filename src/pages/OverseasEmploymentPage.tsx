@@ -188,14 +188,19 @@ export default function OverseasEmploymentPage() {
 
             {/* Ireland */}
             <div className="border border-border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1519491050547-3ca8f97fd82b?w=600&h=300&fit=crop"
-                alt="Ireland landscape and work opportunities"
-                className="w-full h-40 object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = 'https://images.unsplash.com/photo-1539650116574-75c0c6d73a6e?w=600&h=300&fit=crop'
-                }}
-              />
+              <div className="relative w-full h-40 overflow-hidden">
+                {/* Background gradient (Ireland flag colors) as fallback */}
+                <div className="absolute inset-0 bg-gradient-to-r from-green-600 via-white to-orange-500"></div>
+                <img
+                  src="https://images.unsplash.com/photo-1539650116574-75c0c6d73a6e?w=600&h=300&fit=crop"
+                  alt="Ireland landscape and work opportunities"
+                  className="relative w-full h-full object-cover z-10"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.style.opacity = '0'
+                  }}
+                />
+              </div>
               <div className="p-lg">
                 <div className="flex items-center gap-2 mb-sm">
                   <span className="text-3xl">🇮🇪</span>
