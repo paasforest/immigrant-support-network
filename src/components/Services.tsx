@@ -48,6 +48,8 @@ const services = [
     image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=600&fit=crop',
     badge: '🌍 INTERNATIONAL JOBS',
     badgeColor: 'bg-blue-500',
+    link: '/overseas-employment-support',
+    linkLabel: 'Overseas Employment Support →',
   },
 ]
 
@@ -59,7 +61,12 @@ export default function Services() {
           <h2>Our Services</h2>
           <p>
             Cape Town-based visa consulting service supporting clients across South Africa virtually, with popular destinations
-            including the UK, Schengen countries, Canada, USA and Australia.
+            including the{' '}
+            <a href="/services" className="text-primary font-semibold hover:underline">UK</a>,{' '}
+            <a href="/services" className="text-primary font-semibold hover:underline">Schengen</a>,{' '}
+            <a href="/services" className="text-primary font-semibold hover:underline">Canada</a>, USA and Australia. Need{' '}
+            <a href="/contact" className="text-primary font-semibold hover:underline">visa assessment South Africa</a>?{' '}
+            <a href="/contact" className="text-primary font-semibold hover:underline">Book via WhatsApp</a>.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
@@ -92,6 +99,14 @@ export default function Services() {
                 <p className="text-[0.95rem] leading-relaxed text-white/95 drop-shadow">
                   {service.description}
                 </p>
+                {service.link && (
+                  <a
+                    href={service.link}
+                    className="inline-block mt-sm text-white font-semibold hover:underline text-sm"
+                  >
+                    {service.linkLabel}
+                  </a>
+                )}
               </div>
             </div>
           ))}

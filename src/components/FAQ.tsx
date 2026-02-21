@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 const faqs = [
   {
@@ -40,8 +40,19 @@ const faqs = [
   },
 ]
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question' as const,
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer' as const, text: faq.answer },
+  })),
+}
+
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const schemaJson = useMemo(() => JSON.stringify(faqSchema), [])
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
@@ -49,6 +60,7 @@ export default function FAQ() {
 
   return (
     <section className="py-xxl bg-bg-light">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaJson }} />
       <div className="container">
         <div className="section-header">
           <h2>Frequently Asked Questions</h2>
