@@ -65,7 +65,7 @@ export default function JobOpportunities() {
             {/* Ireland */}
             <div className="border border-border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-300">
               <img
-                src="https://images.unsplash.com/photo-1519491050547-3ca8f97fd82b?w=600&h=300&fit=crop"
+                src="https://images.unsplash.com/photo-1539650116574-75c0c6d73a6e?w=600&h=300&fit=crop"
                 alt="Ireland landscape and work opportunities"
                 className="w-full h-40 object-cover"
               />
