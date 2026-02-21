@@ -83,7 +83,7 @@ export default function JobOpportunities() {
             {/* Poland */}
             <div className="border border-border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-300">
               <img
-                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=300&fit=crop"
+                src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=300&fit=crop"
                 alt="Poland professional work environment"
                 className="w-full h-40 object-cover"
               />
@@ -101,7 +101,7 @@ export default function JobOpportunities() {
             {/* Australia */}
             <div className="border border-border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-300">
               <img
-                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=300&fit=crop"
+                src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=600&h=300&fit=crop"
                 alt="Australia work opportunities and skilled migration"
                 className="w-full h-40 object-cover"
               />
