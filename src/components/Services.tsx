@@ -43,9 +43,11 @@ const services = [
   {
     title: 'Work & Skilled Migration',
     description:
-      'Assistance with work permits, skilled migration programs, employer sponsorships, and professional qualification assessments for various countries.',
+      'Specialized in international opportunities: Truck/Driver jobs, Farm & Agriculture work, and Care & Support positions for Canada, Ireland, Poland & Australia. Full assistance with work permits, employer sponsorships, and skilled migration programs.',
     icon: '💼',
     image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&h=600&fit=crop',
+    badge: '🌍 INTERNATIONAL JOBS',
+    badgeColor: 'bg-blue-500',
   },
 ]
 

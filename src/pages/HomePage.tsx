@@ -2,6 +2,7 @@ import Hero from '../components/Hero'
 import PaidServiceBlock from '../components/PaidServiceBlock'
 import TrustBanner from '../components/TrustBanner'
 import Services from '../components/Services'
+import JobOpportunities from '../components/JobOpportunities'
 import HowItWorks from '../components/HowItWorks'
 import Testimonials from '../components/Testimonials'
 import WhyChooseUs from '../components/WhyChooseUs'
@@ -21,6 +22,7 @@ export default function HomePage() {
       <TrustBanner />
       <WhyChooseUs />
       <Services />
+      <JobOpportunities />
       <div id="how-it-works">
         <HowItWorks />
       </div>
