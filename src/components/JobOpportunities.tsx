@@ -2,7 +2,7 @@ export default function JobOpportunities() {
   return (
     <section className="py-xxl bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50">
       <div className="container">
-        {/* Countries We Focus On */}
+        {/* Countries We Focus On - Visa Services */}
         <div>
           <h2 className="text-2xl md:text-3xl font-bold text-center text-text-dark mb-lg">
             Countries We Focus On
@@ -12,16 +12,34 @@ export default function JobOpportunities() {
             <div className="border border-border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-300">
               <img
                 src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&h=300&fit=crop"
-                alt="United Kingdom flag and professional work environment"
+                alt="United Kingdom visa services"
                 className="w-full h-40 object-cover"
               />
               <div className="p-lg">
                 <div className="flex items-center gap-2 mb-sm">
                   <span className="text-3xl">🇬🇧</span>
-                  <h3 className="text-lg font-bold text-text-dark">United Kingdom – Care & Hospitality</h3>
+                  <h3 className="text-lg font-bold text-text-dark">United Kingdom</h3>
                 </div>
                 <p className="text-sm text-text-medium leading-relaxed">
-                  Opportunities in care work, hospitality, and related sectors. We help you understand UK work visa requirements and prepare strong applications.
+                  UK visa application support for tourism, business, study, and work visas. We help you understand requirements and prepare strong applications.
+                </p>
+              </div>
+            </div>
+
+            {/* Schengen */}
+            <div className="border border-border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-300">
+              <img
+                src="https://images.unsplash.com/photo-1523633589114-88eaf4b4f1a8?w=600&h=300&fit=crop"
+                alt="Schengen visa services"
+                className="w-full h-40 object-cover"
+              />
+              <div className="p-lg">
+                <div className="flex items-center gap-2 mb-sm">
+                  <span className="text-3xl">🇪🇺</span>
+                  <h3 className="text-lg font-bold text-text-dark">Schengen Countries</h3>
+                </div>
+                <p className="text-sm text-text-medium leading-relaxed">
+                  EU verification and compliance support for Schengen visa applications. Specialized assistance with document verification and Schengen regulations.
                 </p>
               </div>
             </div>
@@ -30,70 +48,34 @@ export default function JobOpportunities() {
             <div className="border border-border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-300">
               <img
                 src="https://images.unsplash.com/photo-1519832979-6fa011b87667?w=600&h=300&fit=crop"
-                alt="Canada landscape and skilled workers"
+                alt="Canada visa services"
                 className="w-full h-40 object-cover"
               />
               <div className="p-lg">
                 <div className="flex items-center gap-2 mb-sm">
                   <span className="text-3xl">🇨🇦</span>
-                  <h3 className="text-lg font-bold text-text-dark">Canada – Farming, Driving & Skilled Trades</h3>
+                  <h3 className="text-lg font-bold text-text-dark">Canada</h3>
                 </div>
                 <p className="text-sm text-text-medium leading-relaxed">
-                  Farm workers, drivers, and skilled trades. We assist with Canadian work permits and employer-sponsored pathways.
+                  Canadian visa support including Express Entry, Provincial Nominee Programs, study visas, and work permits. Expert guidance for all visa types.
                 </p>
               </div>
             </div>
 
-            {/* Germany */}
+            {/* United States */}
             <div className="border border-border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-300">
               <img
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&h=300&fit=crop"
-                alt="Germany professional work scene – office and skilled workers"
+                src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&h=300&fit=crop"
+                alt="United States visa services"
                 className="w-full h-40 object-cover"
               />
               <div className="p-lg">
                 <div className="flex items-center gap-2 mb-sm">
-                  <span className="text-3xl">🇩🇪</span>
-                  <h3 className="text-lg font-bold text-text-dark">Germany – Skilled Workers & IT</h3>
+                  <span className="text-3xl">🇺🇸</span>
+                  <h3 className="text-lg font-bold text-text-dark">United States</h3>
                 </div>
                 <p className="text-sm text-text-medium leading-relaxed">
-                  Skilled workers and IT professionals. Germany has strong demand; we help with visa applications and documentation.
-                </p>
-              </div>
-            </div>
-
-            {/* Ireland */}
-            <div className="border border-border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1539650116574-75c0c6d73a6e?w=600&h=300&fit=crop"
-                alt="Ireland landscape and work opportunities"
-                className="w-full h-40 object-cover"
-              />
-              <div className="p-lg">
-                <div className="flex items-center gap-2 mb-sm">
-                  <span className="text-3xl">🇮🇪</span>
-                  <h3 className="text-lg font-bold text-text-dark">Ireland – Care, Hospitality & Skilled Work</h3>
-                </div>
-                <p className="text-sm text-text-medium leading-relaxed">
-                  Opportunities in care work, hospitality, and skilled sectors. We help you understand Irish work visa requirements and prepare strong applications.
-                </p>
-              </div>
-            </div>
-
-            {/* Poland */}
-            <div className="border border-border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=300&fit=crop"
-                alt="Poland professional work environment"
-                className="w-full h-40 object-cover"
-              />
-              <div className="p-lg">
-                <div className="flex items-center gap-2 mb-sm">
-                  <span className="text-3xl">🇵🇱</span>
-                  <h3 className="text-lg font-bold text-text-dark">Poland – Skilled Workers & Manufacturing</h3>
-                </div>
-                <p className="text-sm text-text-medium leading-relaxed">
-                  Skilled workers, manufacturing, and technical positions. We assist with Polish work permits and EU work permits.
+                  US visa application support for tourism, business, study, and work visas. We help you navigate US immigration requirements and prepare documentation.
                 </p>
               </div>
             </div>
@@ -102,16 +84,16 @@ export default function JobOpportunities() {
             <div className="border border-border rounded-xl overflow-hidden bg-white shadow-md hover:shadow-lg transition-all duration-300">
               <img
                 src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=600&h=300&fit=crop"
-                alt="Australia work opportunities and skilled migration"
+                alt="Australia visa services"
                 className="w-full h-40 object-cover"
               />
               <div className="p-lg">
                 <div className="flex items-center gap-2 mb-sm">
                   <span className="text-3xl">🇦🇺</span>
-                  <h3 className="text-lg font-bold text-text-dark">Australia – Skilled Migration & Regional Work</h3>
+                  <h3 className="text-lg font-bold text-text-dark">Australia</h3>
                 </div>
                 <p className="text-sm text-text-medium leading-relaxed">
-                  Skilled migration, regional work opportunities, and employer-sponsored pathways. We help with Australian work visas and permanent residency applications.
+                  Australian visa support for skilled migration, work visas, study visas, and permanent residency pathways. Comprehensive application assistance.
                 </p>
               </div>
             </div>
