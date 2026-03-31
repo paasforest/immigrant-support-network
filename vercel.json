@@ -1,4 +1,18 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "query", "key": "c" }],
+      "destination": "https://www.immigrantsupportnetwork.co.za/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "header", "key": "host", "value": "immigrantsupportnetwork.co.za" }],
+      "destination": "https://www.immigrantsupportnetwork.co.za/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/",
