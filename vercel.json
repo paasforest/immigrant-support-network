@@ -1,7 +1,51 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/overseas-employment-support",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/visa-updates",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/top-countries-hiring-2026",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/step-by-step-work-permits",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/how-to-apply-safely",
       "destination": "/index.html"
     }
   ],
